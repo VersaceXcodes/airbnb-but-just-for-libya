@@ -400,8 +400,9 @@ export const useAppStore = create<AppState>()(
           
           // Connect websocket after successful auth initialization
           get().connect_websocket(auth_token);
-        } catch (error) {
+        } catch (err) {
           // Token is invalid, clear auth state
+          console.error('Auth initialization error:', err);
           set(() => ({
             authentication_state: {
               current_user: null,

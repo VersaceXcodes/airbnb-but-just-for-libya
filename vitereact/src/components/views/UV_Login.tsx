@@ -69,8 +69,9 @@ const UV_Login: React.FC = () => {
     try {
       await loginUser(email, password);
       navigate('/dashboard');
-    } catch (error: any) {
+    } catch (err: any) {
       // Error is handled in store, but we'll set general error here
+      console.error('Login error:', err);
       setErrors(prev => ({
         ...prev,
         general: errorMessage || 'An error occurred during login'
