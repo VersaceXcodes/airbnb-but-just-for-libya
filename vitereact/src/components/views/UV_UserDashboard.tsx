@@ -145,7 +145,7 @@ const UV_UserDashboard: React.FC = () => {
   
   // Render role-specific tabs
   const renderTabs = () => {
-    const tabs = [];
+    const tabs: JSX.Element[] = [];
     
     if (currentUser?.role === 'traveler' || currentUser?.role === 'both') {
       tabs.push(

@@ -117,13 +117,13 @@ interface NotificationCount {
 }
 
 // WebSocket Events
-type WebSocketEvents = 
-  | 'message:new'
-  | 'message:read'
-  | 'booking:request'
-  | 'booking:confirmed'
-  | 'booking:declined'
-  | 'booking:cancelled';
+// type WebSocketEvents = 
+//   | 'message:new'
+//   | 'message:read'
+//   | 'booking:request'
+//   | 'booking:confirmed'
+//   | 'booking:declined'
+//   | 'booking:cancelled';
 
   // Store State
 interface AppState {
@@ -559,27 +559,27 @@ export const useAppStore = create<AppState>()(
         if (!socket) return;
         
         // Handle new messages
-        socket.on('message:new', (data) => {
+        socket.on('message:new', () => {
           get().increment_notification_count();
         });
         
         // Handle booking requests
-        socket.on('booking:request', (data) => {
+        socket.on('booking:request', () => {
           get().increment_notification_count();
         });
         
         // Handle booking confirmations
-        socket.on('booking:confirmed', (data) => {
+        socket.on('booking:confirmed', () => {
           get().increment_notification_count();
         });
         
         // Handle booking declines
-        socket.on('booking:declined', (data) => {
+        socket.on('booking:declined', () => {
           get().increment_notification_count();
         });
         
         // Handle booking cancellations
-        socket.on('booking:cancelled', (data) => {
+        socket.on('booking:cancelled', () => {
           get().increment_notification_count();
         });
       },
