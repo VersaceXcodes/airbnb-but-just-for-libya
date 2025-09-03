@@ -229,7 +229,7 @@ const UV_MessagingCenter: React.FC = () => {
     };
     
     loadMessages();
-  }, [activeConversation, fetchMessages, currentUser, markMessageAsReadMutation]);
+  }, [activeConversation, fetchMessages, currentUser]);
   
   // Handle sending a new message
   const handleSendMessage = (e: React.FormEvent) => {

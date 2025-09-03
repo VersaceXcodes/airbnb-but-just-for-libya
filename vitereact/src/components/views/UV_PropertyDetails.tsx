@@ -733,8 +733,8 @@ const UV_PropertyDetails: React.FC = () => {
               <div className="mb-8 p-6 bg-white rounded-lg shadow-md">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-4">What this place offers</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {amenitiesList.map((amenity, index) => (
-                    <div key={index} className="flex items-center">
+                  {amenitiesList.map((amenity) => (
+                    <div key={amenity} className="flex items-center">
                       <div className="mr-3">
                         {renderAmenityIcon(amenity)}
                       </div>

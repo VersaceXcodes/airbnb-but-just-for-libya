@@ -142,8 +142,11 @@ const GV_NotificationsPanel: React.FC = () => {
     
     const handleNotificationCreated = (data: Notification) => {
       setLocalNotifications(prev => [data, ...prev]);
-      setUnreadCount(prev => prev + 1);
-      updateNotificationCount(unreadCount + 1);
+      setUnreadCount(prev => {
+        const newCount = prev + 1;
+        updateNotificationCount(newCount);
+        return newCount;
+      });
     };
     
     const handleNotificationUpdated = (data: Notification) => {
@@ -163,7 +166,7 @@ const GV_NotificationsPanel: React.FC = () => {
       websocketConnection.off('notification/created', handleNotificationCreated);
       websocketConnection.off('notification/updated', handleNotificationUpdated);
     };
-  }, [isAuthenticated, unreadCount, updateNotificationCount]);
+  }, [isAuthenticated, updateNotificationCount]);
   
   // Format date for display
   const formatDate = (dateString: string) => {

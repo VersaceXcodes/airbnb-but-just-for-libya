@@ -27,7 +27,12 @@ export const createUserInputSchema = z.object({
   bio: z.string().max(1000).nullable().optional(),
   emergency_contact_name: z.string().max(100).nullable().optional(),
   emergency_contact_phone: z.string().max(20).nullable().optional(),
-  role: z.enum(['guest', 'host', 'admin']),
+  role: z.enum(['guest', 'host', 'admin', 'traveler', 'both']).transform(val => {
+    // Map frontend roles to backend roles
+    if (val === 'traveler') return 'guest';
+    if (val === 'both') return 'host'; // Users with 'both' role can host
+    return val;
+  }),
   is_verified: z.boolean().optional(),
   verification_document_url: z.string().url().nullable().optional()
 });
@@ -42,7 +47,12 @@ export const updateUserInputSchema = z.object({
   bio: z.string().max(1000).nullable().optional(),
   emergency_contact_name: z.string().max(100).nullable().optional(),
   emergency_contact_phone: z.string().max(20).nullable().optional(),
-  role: z.enum(['guest', 'host', 'admin']).optional(),
+  role: z.enum(['guest', 'host', 'admin', 'traveler', 'both']).transform(val => {
+    // Map frontend roles to backend roles
+    if (val === 'traveler') return 'guest';
+    if (val === 'both') return 'host'; // Users with 'both' role can host
+    return val;
+  }).optional(),
   is_verified: z.boolean().optional(),
   verification_document_url: z.string().url().nullable().optional()
 });

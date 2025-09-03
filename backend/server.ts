@@ -320,6 +320,17 @@ app.post('/api/auth/logout', authenticateToken, (req, res) => {
   });
 });
 
+/*
+Token verification endpoint
+Validates JWT token and returns user information
+*/
+app.get('/api/auth/verify', authenticateToken, (req, res) => {
+  res.json({
+    user: req.user,
+    valid: true
+  });
+});
+
 // User Management Routes
 
 /*
@@ -494,10 +505,25 @@ Supports location, date range, guest count, price range, and amenity filtering
 */
 app.get('/api/properties', async (req, res) => {
   try {
+    // Coerce query parameters to proper types
+    const searchParams = {
+      location: req.query.location,
+      check_in: req.query.check_in,
+      check_out: req.query.check_out,
+      guests: req.query.guests ? parseInt(req.query.guests) || undefined : undefined,
+      price_min: req.query.price_min ? parseFloat(req.query.price_min) || undefined : undefined,
+      price_max: req.query.price_max ? parseFloat(req.query.price_max) || undefined : undefined,
+      property_type: req.query.property_type,
+      amenities: req.query.amenities,
+      sort_by: req.query.sort_by,
+      limit: parseInt(req.query.limit) || 10,
+      offset: parseInt(req.query.offset) || 0
+    };
+
     const {
       location, check_in, check_out, guests, price_min, price_max,
-      property_type, amenities, sort_by, limit = 10, offset = 0
-    } = req.query;
+      property_type, amenities, sort_by, limit, offset
+    } = searchParams;
 
     let query = `SELECT * FROM properties WHERE is_active = true`;
     const queryParams = [];
@@ -513,20 +539,20 @@ app.get('/api/properties', async (req, res) => {
     // Guest capacity filtering
     if (guests) {
       query += ` AND guest_capacity >= $${paramCount}`;
-      queryParams.push(parseInt(guests));
+      queryParams.push(guests);
       paramCount++;
     }
 
     // Price range filtering
     if (price_min) {
       query += ` AND base_price_per_night >= $${paramCount}`;
-      queryParams.push(parseFloat(price_min));
+      queryParams.push(price_min);
       paramCount++;
     }
 
     if (price_max) {
       query += ` AND base_price_per_night <= $${paramCount}`;
-      queryParams.push(parseFloat(price_max));
+      queryParams.push(price_max);
       paramCount++;
     }
 
@@ -572,7 +598,7 @@ app.get('/api/properties', async (req, res) => {
 
     // Pagination
     query += ` LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
-    queryParams.push(parseInt(limit), parseInt(offset));
+    queryParams.push(limit, offset);
 
     const result = await pool.query(query, queryParams);
 
@@ -1033,10 +1059,22 @@ Advanced booking search with filtering and pagination
 */
 app.get('/api/bookings', authenticateToken, async (req, res) => {
   try {
+    // Coerce query parameters to proper types
+    const bookingParams = {
+      property_id: req.query.property_id,
+      guest_id: req.query.guest_id,
+      host_id: req.query.host_id,
+      status: req.query.status,
+      start_date: req.query.start_date,
+      end_date: req.query.end_date,
+      limit: parseInt(req.query.limit) || 10,
+      offset: parseInt(req.query.offset) || 0
+    };
+
     const {
       property_id, guest_id, host_id, status, start_date, end_date,
-      limit = 10, offset = 0
-    } = req.query;
+      limit, offset
+    } = bookingParams;
 
     let query = `SELECT * FROM bookings WHERE 1=1`;
     const queryParams = [];
@@ -1415,20 +1453,80 @@ app.post('/api/bookings/:booking_id/reviews', authenticateToken, async (req, res
 // Conversation and Messaging Routes
 
 /*
+Create conversation endpoint
+Creates new conversation between users
+*/
+app.post('/api/conversations', authenticateToken, async (req, res) => {
+  try {
+    const conversationData = createConversationInputSchema.parse({
+      ...req.body,
+      guest_id: req.user.user_id
+    });
+
+    // Validate booking exists and user has access
+    const bookingCheck = await pool.query(
+      'SELECT * FROM bookings WHERE booking_id = $1 AND (guest_id = $2 OR host_id = $2)',
+      [conversationData.booking_id, req.user.user_id]
+    );
+
+    if (bookingCheck.rows.length === 0) {
+      return res.status(404).json(createErrorResponse('Booking not found or access denied', null, 'BOOKING_NOT_FOUND'));
+    }
+
+    // Check if conversation already exists
+    const existingConv = await pool.query(
+      'SELECT conversation_id FROM conversations WHERE booking_id = $1',
+      [conversationData.booking_id]
+    );
+
+    if (existingConv.rows.length > 0) {
+      return res.json(existingConv.rows[0]);
+    }
+
+    const conversation_id = `conv_${nanoid()}`;
+    const now = new Date().toISOString();
+
+    const result = await pool.query(
+      `INSERT INTO conversations (conversation_id, booking_id, guest_id, host_id, created_at, updated_at)
+       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [conversation_id, conversationData.booking_id, conversationData.guest_id, conversationData.host_id, now, now]
+    );
+
+    const newConversation = result.rows[0];
+
+    // Emit WebSocket event
+    io.emit('conversation/created', newConversation);
+
+    res.status(201).json(newConversation);
+  } catch (error) {
+    console.error('Create conversation error:', error);
+    if (error.name === 'ZodError') {
+      return res.status(400).json(createErrorResponse('Validation error', error.errors, 'VALIDATION_ERROR'));
+    }
+    res.status(500).json(createErrorResponse('Internal server error', error, 'INTERNAL_SERVER_ERROR'));
+  }
+});
+
+/*
 Get user conversations endpoint
 Retrieves all conversations for authenticated user
 */
 app.get('/api/conversations', authenticateToken, async (req, res) => {
   try {
-    const { limit = 10, offset = 0 } = req.query;
+    // Coerce query parameters to proper types
+    const convParams = {
+      limit: parseInt(req.query.limit) || 10,
+      offset: parseInt(req.query.offset) || 0
+    };
+
+    const { limit, offset } = convParams;
 
     const result = await pool.query(
       `SELECT * FROM conversations 
        WHERE guest_id = $1 OR host_id = $1 
        ORDER BY updated_at DESC 
        LIMIT $2 OFFSET $3`,
-      [req.user.user_id, parseInt(limit), parseInt(offset)]
-    );
+       [req.user.user_id, limit, offset]    );
 
     res.json(result.rows);
   } catch (error) {
@@ -1475,7 +1573,13 @@ Retrieves all messages in a conversation with pagination
 app.get('/api/conversations/:conversation_id/messages', authenticateToken, async (req, res) => {
   try {
     const { conversation_id } = req.params;
-    const { limit = 20, offset = 0 } = req.query;
+    // Coerce query parameters to proper types
+    const msgParams = {
+      limit: parseInt(req.query.limit) || 20,
+      offset: parseInt(req.query.offset) || 0
+    };
+
+    const { limit, offset } = msgParams;
 
     // Check conversation access
     const conversationResult = await pool.query(
@@ -1498,8 +1602,7 @@ app.get('/api/conversations/:conversation_id/messages', authenticateToken, async
        WHERE conversation_id = $1 
        ORDER BY created_at ASC 
        LIMIT $2 OFFSET $3`,
-      [conversation_id, parseInt(limit), parseInt(offset)]
-    );
+       [conversation_id, limit, offset]    );
 
     res.json(result.rows);
   } catch (error) {
@@ -1644,7 +1747,14 @@ Retrieves notifications for authenticated user with filtering
 */
 app.get('/api/notifications', authenticateToken, async (req, res) => {
   try {
-    const { is_read, limit = 10, offset = 0 } = req.query;
+    // Coerce query parameters to proper types
+    const notifParams = {
+      is_read: req.query.is_read,
+      limit: parseInt(req.query.limit) || 10,
+      offset: parseInt(req.query.offset) || 0
+    };
+
+    const { is_read, limit, offset } = notifParams;
 
     let query = `SELECT * FROM notifications WHERE user_id = $1`;
     const queryParams = [req.user.user_id];

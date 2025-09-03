@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAppStore } from '@/store/main';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
@@ -33,6 +33,7 @@ const UV_ProfileSettings: React.FC = () => {
   const [verificationDocument, setVerificationDocument] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const successTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Query client for cache invalidation
   const queryClient = useQueryClient();
@@ -69,6 +70,15 @@ const UV_ProfileSettings: React.FC = () => {
     }
   }, [userData]);
 
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (successTimerRef.current) {
+        clearTimeout(successTimerRef.current);
+      }
+    };
+  }, []);
+
   // Update user profile mutation
   const updateProfileMutation = useMutation({
     mutationFn: async (updatedData: Partial<User>) => {
@@ -89,7 +99,8 @@ const UV_ProfileSettings: React.FC = () => {
       setSuccess('Profile updated successfully');
       setError(null);
       // Clear success message after 3 seconds
-      setTimeout(() => setSuccess(null), 3000);
+      if (successTimerRef.current) clearTimeout(successTimerRef.current);
+      successTimerRef.current = setTimeout(() => setSuccess(null), 3000);
     },
     onError: (error: any) => {
       setError(error.response?.data?.message || 'Failed to update profile');
@@ -143,7 +154,8 @@ const UV_ProfileSettings: React.FC = () => {
       setVerificationDocument(e.target.files[0]);
       // In a real implementation, you would upload the file here
       setSuccess('Document selected for upload');
-      setTimeout(() => setSuccess(null), 3000);
+      if (successTimerRef.current) clearTimeout(successTimerRef.current);
+      successTimerRef.current = setTimeout(() => setSuccess(null), 3000);
     }
   };
 
