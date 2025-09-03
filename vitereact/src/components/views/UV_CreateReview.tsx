@@ -185,7 +185,7 @@ const UV_CreateReview: React.FC = () => {
   ]);
   
   // Upload photo to server
-  const uploadPhoto = async (file: File, reviewId: string): Promise<string> => {
+  const uploadPhoto = async (file: File): Promise<string> => {
     // In a real app, this would upload to a file storage service
     // For now, we'll create a mock URL
     return URL.createObjectURL(file);

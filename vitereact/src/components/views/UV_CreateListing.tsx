@@ -277,7 +277,7 @@ const UV_CreateListing: React.FC = () => {
         amenities: listingData.amenities,
         latitude: null,
         longitude: null,
-        house_rules: listingData.house_rules || null,
+        house_rules: listingData.house_rules || '',
         neighborhood: listingData.neighborhood || '',
         address: listingData.address || ''
       };
