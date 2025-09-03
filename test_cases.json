@@ -1,0 +1,122 @@
+{
+  "testCases": [
+    {
+      "id": "functional-app-test",
+      "name": "Functional Application Test",
+      "category": "functionality",
+      "priority": "high",
+      "description": "Verify the application has actual functionality beyond basic placeholder",
+      "steps": [
+        "Navigate to application",
+        "Verify multiple interactive elements exist (buttons, forms, links)",
+        "Check for proper navigation structure",
+        "Verify application has real features, not just 'Vite + React' text"
+      ],
+      "expectedOutcome": "Application shows functional features and interactivity",
+      "failureCondition": "If page only shows 'Vite + React' placeholder, this test should FAIL"
+    },
+    {
+      "id": "ui-components-test",
+      "name": "UI Components Test",
+      "category": "interface",
+      "priority": "high",
+      "description": "Test that UI components are properly implemented",
+      "steps": [
+        "Check for buttons and verify they're clickable",
+        "Look for forms and input fields",
+        "Verify navigation menu exists",
+        "Test responsive design elements"
+      ],
+      "expectedOutcome": "Multiple interactive UI components found and functional"
+    },
+    {
+      "id": "content-quality-test",
+      "name": "Content Quality Test",
+      "category": "content",
+      "priority": "high",
+      "description": "Verify application has meaningful content",
+      "steps": [
+        "Check page has substantial content beyond placeholder",
+        "Verify proper heading structure",
+        "Look for actual application features",
+        "Ensure professional appearance"
+      ],
+      "expectedOutcome": "Application demonstrates real functionality and professional design"
+    },
+    {
+      "id": "user-authentication-test",
+      "name": "User Authentication Test",
+      "category": "authentication",
+      "priority": "high",
+      "description": "Verify user authentication functionality",
+      "steps": [
+        "Navigate to login page",
+        "Attempt login with valid credentials",
+        "Verify successful authentication",
+        "Check that user is redirected to dashboard",
+        "Verify user information is properly stored"
+      ],
+      "expectedOutcome": "User can successfully authenticate and access protected routes"
+    },
+    {
+      "id": "property-search-test",
+      "name": "Property Search Test",
+      "category": "search",
+      "priority": "high",
+      "description": "Verify property search functionality",
+      "steps": [
+        "Navigate to homepage",
+        "Use search form to look for properties",
+        "Verify search results are displayed",
+        "Check that property details are accessible"
+      ],
+      "expectedOutcome": "Users can search for properties and view results"
+    },
+    {
+      "id": "booking-workflow-test",
+      "name": "Booking Workflow Test",
+      "category": "booking",
+      "priority": "medium",
+      "description": "Verify the booking workflow for travelers",
+      "steps": [
+        "Authenticate as a guest user",
+        "Search for a property",
+        "Select property and initiate booking",
+        "Fill booking form",
+        "Submit booking request",
+        "Verify booking appears in user dashboard"
+      ],
+      "expectedOutcome": "Guest users can successfully request bookings"
+    },
+    {
+      "id": "host-management-test",
+      "name": "Host Management Test",
+      "category": "management",
+      "priority": "medium",
+      "description": "Verify property management functionality for hosts",
+      "steps": [
+        "Authenticate as a host user",
+        "Navigate to host dashboard",
+        "Create a new property listing",
+        "Edit existing property listing",
+        "Verify listings appear in dashboard"
+      ],
+      "expectedOutcome": "Host users can manage their property listings"
+    },
+    {
+      "id": "messaging-test",
+      "name": "Messaging Test",
+      "category": "communication",
+      "priority": "medium",
+      "description": "Verify messaging functionality between guests and hosts",
+      "steps": [
+        "Authenticate as a guest user",
+        "Initiate booking request",
+        "Navigate to messaging center",
+        "Send message to host",
+        "Verify message delivery"
+      ],
+      "expectedOutcome": "Users can communicate through the messaging system"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "tech_stack": ["React", "Vite", "TypeScript", "Express", "PostgreSQL", "Node.js", "Zustand", "Socket.IO", "Tailwind CSS"],
+  "features": [
+    {
+      "name": "User Authentication",
+      "description": "Login, registration, session management with JWT tokens",
+      "files": ["src/store/main.tsx", "src/components/views/UV_Login.tsx", "src/components/views/UV_Registration.tsx"]
+    },
+    {
+      "name": "Property Management",
+      "description": "Create, view, edit, and search property listings",
+      "files": ["src/components/views/UV_CreateListing.tsx", "src/components/views/UV_EditListing.tsx", "src/components/views/UV_SearchResults.tsx", "src/components/views/UV_PropertyDetails.tsx"]
+    },
+    {
+      "name": "Booking System",
+      "description": "Book stays, manage reservations, and handle booking requests",
+      "files": ["src/components/views/UV_TravelerBookings.tsx", "src/components/views/UV_HostBookings.tsx"]
+    },
+    {
+      "name": "Messaging",
+      "description": "Real-time communication between guests and hosts",
+      "files": ["src/components/views/UV_MessagingCenter.tsx"]
+    },
+    {
+      "name": "Reviews",
+      "description": "Leave and view reviews for properties and hosts",
+      "files": ["src/components/views/UV_CreateReview.tsx"]
+    },
+    {
+      "name": "User Dashboard",
+      "description": "Personalized dashboard for travelers and hosts",
+      "files": ["src/components/views/UV_UserDashboard.tsx", "src/components/views/UV_HostListingsDashboard.tsx"]
+    },
+    {
+      "name": "Admin Panel",
+      "description": "Administrative functions for managing users and properties",
+      "files": ["src/components/views/UV_AdminPanel.tsx"]
+    },
+    {
+      "name": "Profile Management",
+      "description": "User profile settings and preferences",
+      "files": ["src/components/views/UV_ProfileSettings.tsx"]
+    }
+  ],
+  "database_tables": [
+    "users",
+    "properties",
+    "property_photos",
+    "property_availability",
+    "bookings",
+    "conversations",
+    "messages",
+    "reviews",
+    "review_photos",
+    "admin_actions",
+    "notifications"
+  ],
+  "api_endpoints": [
+    "/api/auth/register",
+    "/api/auth/login",
+    "/api/auth/logout",
+    "/api/auth/verify",
+    "/api/users/:user_id",
+    "/api/users/:user_id/listings",
+    "/api/users/:user_id/bookings",
+    "/api/users/:user_id/reviews",
+    "/api/properties",
+    "/api/properties/:property_id",
+    "/api/properties/:property_id/photos",
+    "/api/properties/:property_id/availability",
+    "/api/properties/:property_id/reviews",
+    "/api/bookings",
+    "/api/bookings/:booking_id",
+    "/api/bookings/:booking_id/reviews",
+    "/api/conversations",
+    "/api/conversations/:conversation_id",
+    "/api/conversations/:conversation_id/messages",
+    "/api/messages/:message_id",
+    "/api/notifications",
+    "/api/health"
+  ]
+}
