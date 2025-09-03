@@ -186,9 +186,27 @@ const UV_CreateReview: React.FC = () => {
   
   // Upload photo to server
   const uploadPhoto = async (file: File): Promise<string> => {
-    // In a real app, this would upload to a file storage service
-    // For now, we'll create a mock URL
-    return URL.createObjectURL(file);
+    // Create FormData for file upload
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'}/api/upload`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${authToken}`
+          }
+        }
+      );
+      
+      return response.data.url; // Return the uploaded file URL
+    } catch (error) {
+      console.error('Error uploading photo:', error);
+      throw error;
+    }
   };
   
   // Create review photo record

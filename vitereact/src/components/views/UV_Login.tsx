@@ -69,7 +69,7 @@ const UV_Login: React.FC = () => {
     try {
       await loginUser(email, password);
       navigate('/dashboard');
-    } catch (error) {
+    } catch (error: any) {
       // Error is handled in store, but we'll set general error here
       setErrors(prev => ({
         ...prev,

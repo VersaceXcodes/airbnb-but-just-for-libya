@@ -70,7 +70,7 @@ const UV_SearchResults: React.FC = () => {
         amenities: amenitiesParam.split(',')
       }));
     }
-  }, []);
+  }, [searchParams]);
 
   // Update global search filters
   useEffect(() => {

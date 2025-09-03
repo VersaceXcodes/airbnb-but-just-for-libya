@@ -6,7 +6,7 @@ import { useAppStore } from '@/store/main';
 import { Notification } from '@/store/main'; // Using the interface from store
 
 // Define TypeScript interfaces
-interface FetchNotificationsResponse extends Array<Notification> {}
+type FetchNotificationsResponse = Array<Notification>;
 
 interface UpdateNotificationPayload {
   is_read: boolean;
