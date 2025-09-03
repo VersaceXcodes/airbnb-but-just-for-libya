@@ -222,11 +222,12 @@ export const useAppStore = create<AppState>()(
       
       // Authentication actions
       login_user: async (email: string, password: string) => {
-        set((state) => ({
+        set(() => ({
           authentication_state: {
-            ...state.authentication_state,
+            current_user: null,
+            auth_token: null,
             authentication_status: {
-              ...state.authentication_state.authentication_status,
+              is_authenticated: false,
               is_loading: true,
             },
             error_message: null,
@@ -262,7 +263,7 @@ export const useAppStore = create<AppState>()(
         } catch (error: any) {
           const errorMessage = error.response?.data?.message || error.message || 'Login failed';
           
-          set((state) => ({
+          set(() => ({
             authentication_state: {
               current_user: null,
               auth_token: null,
@@ -299,11 +300,12 @@ export const useAppStore = create<AppState>()(
       },
       
       register_user: async (user_data) => {
-        set((state) => ({
+        set(() => ({
           authentication_state: {
-            ...state.authentication_state,
+            current_user: null,
+            auth_token: null,
             authentication_status: {
-              ...state.authentication_state.authentication_status,
+              is_authenticated: false,
               is_loading: true,
             },
             error_message: null,
@@ -339,11 +341,12 @@ export const useAppStore = create<AppState>()(
         } catch (error: any) {
           const errorMessage = error.response?.data?.message || error.message || 'Registration failed';
           
-          set((state) => ({
+          set(() => ({
             authentication_state: {
-              ...state.authentication_state,
+              current_user: null,
+              auth_token: null,
               authentication_status: {
-                ...state.authentication_state.authentication_status,
+                is_authenticated: false,
                 is_loading: false,
               },
               error_message: errorMessage,
@@ -358,13 +361,15 @@ export const useAppStore = create<AppState>()(
         const { auth_token } = get().authentication_state;
         
         if (!auth_token) {
-          set((state) => ({
+          set(() => ({
             authentication_state: {
-              ...state.authentication_state,
+              current_user: null,
+              auth_token: null,
               authentication_status: {
-                ...state.authentication_state.authentication_status,
+                is_authenticated: false,
                 is_loading: false,
               },
+              error_message: null,
             },
           }));
           return;
