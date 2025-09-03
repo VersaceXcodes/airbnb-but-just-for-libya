@@ -1,0 +1,15 @@
+{
+  "timestamp": 1756910136713,
+  "operation": {
+    "id": "db:postgres"
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/backend/db.sql",
+      "type": "text",
+      "size": 12092,
+      "dependencies": false
+    }
+  ]
+}

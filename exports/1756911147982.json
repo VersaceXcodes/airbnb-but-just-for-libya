@@ -1,0 +1,19 @@
+{
+  "timestamp": 1756911147982,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "GV_NotificationsPanel",
+      "version": "latest"
+    }
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/vitereact/src/components/views/GV_NotificationsPanel.tsx",
+      "type": "text",
+      "size": 15547,
+      "dependencies": false
+    }
+  ]
+}

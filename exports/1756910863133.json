@@ -1,0 +1,21 @@
+{
+  "timestamp": 1756910863133,
+  "operation": {
+    "id": "settings:config:package"
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/backend/package.json",
+      "type": "text",
+      "size": 1466,
+      "dependencies": true
+    },
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/backend/.env",
+      "type": "text",
+      "size": 487,
+      "dependencies": false
+    }
+  ]
+}

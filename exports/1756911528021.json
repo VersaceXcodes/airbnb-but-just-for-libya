@@ -1,0 +1,19 @@
+{
+  "timestamp": 1756911528021,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_CreateListing",
+      "version": "latest"
+    }
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/vitereact/src/components/views/UV_CreateListing.tsx",
+      "type": "text",
+      "size": 45528,
+      "dependencies": false
+    }
+  ]
+}

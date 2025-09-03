@@ -1,0 +1,19 @@
+{
+  "timestamp": 1756911126689,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_HostBookings",
+      "version": "1756911056352"
+    }
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/vitereact/src/components/views/UV_HostBookings.tsx",
+      "type": "text",
+      "size": 31259,
+      "dependencies": false
+    }
+  ]
+}

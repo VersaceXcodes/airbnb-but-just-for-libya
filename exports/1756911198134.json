@@ -1,0 +1,19 @@
+{
+  "timestamp": 1756911198134,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "GV_TopNav",
+      "version": "latest"
+    }
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/vitereact/src/components/views/GV_TopNav.tsx",
+      "type": "text",
+      "size": 17790,
+      "dependencies": false
+    }
+  ]
+}

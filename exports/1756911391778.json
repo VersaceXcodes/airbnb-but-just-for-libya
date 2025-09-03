@@ -1,0 +1,19 @@
+{
+  "timestamp": 1756911391778,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_CreateReview",
+      "version": "1756911213126"
+    }
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/vitereact/src/components/views/UV_CreateReview.tsx",
+      "type": "text",
+      "size": 25057,
+      "dependencies": false
+    }
+  ]
+}

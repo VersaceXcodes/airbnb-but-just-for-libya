@@ -1,0 +1,21 @@
+{
+  "timestamp": 1756911018949,
+  "operation": {
+    "id": "backend:tests:main"
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/backend/server.test.ts",
+      "type": "text",
+      "size": 19981,
+      "dependencies": false
+    },
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/backend/jest.config.ts",
+      "type": "text",
+      "size": 473,
+      "dependencies": false
+    }
+  ]
+}

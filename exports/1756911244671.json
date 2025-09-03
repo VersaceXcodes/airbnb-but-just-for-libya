@@ -1,0 +1,19 @@
+{
+  "timestamp": 1756911244671,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_TravelerBookings",
+      "version": "latest"
+    }
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/vitereact/src/components/views/UV_TravelerBookings.tsx",
+      "type": "text",
+      "size": 23910,
+      "dependencies": false
+    }
+  ]
+}

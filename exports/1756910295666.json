@@ -1,0 +1,15 @@
+{
+  "timestamp": 1756910295666,
+  "operation": {
+    "id": "backend:specifications:asyncapi"
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/backend/asyncapi.yaml",
+      "type": "text",
+      "size": 18657,
+      "dependencies": false
+    }
+  ]
+}

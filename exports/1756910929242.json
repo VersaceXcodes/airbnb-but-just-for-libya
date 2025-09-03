@@ -1,0 +1,19 @@
+{
+  "timestamp": 1756910929242,
+  "operation": {
+    "id": "webapp:react:store",
+    "refs": {
+      "id": "redux",
+      "version": "1756910863721"
+    }
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/vitereact/src/store/main.tsx",
+      "type": "text",
+      "size": 16334,
+      "dependencies": false
+    }
+  ]
+}

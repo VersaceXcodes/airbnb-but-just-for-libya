@@ -1,0 +1,15 @@
+{
+  "timestamp": 1756910164327,
+  "operation": {
+    "id": "db:schemas:zod"
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/backend/schema.ts",
+      "type": "text",
+      "size": 21790,
+      "dependencies": false
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "timestamp": 1756911231370,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "GV_SearchBarWidget",
+      "version": "latest"
+    }
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/vitereact/src/components/views/GV_SearchBarWidget.tsx",
+      "type": "text",
+      "size": 17112,
+      "dependencies": false
+    }
+  ]
+}

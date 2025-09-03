@@ -1,0 +1,19 @@
+{
+  "timestamp": 1756911201513,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "GV_Footer",
+      "version": "1756911056649"
+    }
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/vitereact/src/components/views/GV_Footer.tsx",
+      "type": "text",
+      "size": 9621,
+      "dependencies": false
+    }
+  ]
+}

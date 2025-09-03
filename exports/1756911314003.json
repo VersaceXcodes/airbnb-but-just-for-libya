@@ -1,0 +1,19 @@
+{
+  "timestamp": 1756911314003,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_AdminPanel",
+      "version": "latest"
+    }
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/vitereact/src/components/views/UV_AdminPanel.tsx",
+      "type": "text",
+      "size": 53827,
+      "dependencies": false
+    }
+  ]
+}

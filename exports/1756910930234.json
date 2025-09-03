@@ -1,0 +1,15 @@
+{
+  "timestamp": 1756910930234,
+  "operation": {
+    "id": "settings:config:package"
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/vitereact/package.json",
+      "type": "text",
+      "size": 2949,
+      "dependencies": true
+    }
+  ]
+}

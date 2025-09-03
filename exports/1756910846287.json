@@ -1,0 +1,15 @@
+{
+  "timestamp": 1756910846287,
+  "operation": {
+    "id": "backend:server:main"
+  },
+  "projectId": "airbnb-but-just-for-libya",
+  "files": [
+    {
+      "path": "../../apps/airbnb-but-just-for-libya/backend/server.ts",
+      "type": "text",
+      "size": 60210,
+      "dependencies": false
+    }
+  ]
+}
