@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useAppStore } from '@/store/main';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import { User } from '@/types'; // Assuming Zod schemas are converted to TypeScript types
+
 
 const UV_ProfileSettings: React.FC = () => {
   // Global state
@@ -81,7 +81,7 @@ const UV_ProfileSettings: React.FC = () => {
 
   // Update user profile mutation
   const updateProfileMutation = useMutation({
-    mutationFn: async (updatedData: Partial<User>) => {
+    mutationFn: async (updatedData: any) => {
       const response = await axios.patch(
         `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'}/api/users/${currentUser?.user_id}`,
         updatedData,

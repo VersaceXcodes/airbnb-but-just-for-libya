@@ -97,7 +97,7 @@ const UV_SearchResults: React.FC = () => {
     if (filters.location) params.location = filters.location;
     if (filters.check_in) params.check_in = filters.check_in;
     if (filters.check_out) params.check_out = filters.check_out;
-    if (filters.guest_count) params.guests = filters.guest_count;
+    if (filters.guest_count) params.guests = filters.guest_count.toString();
     if (filters.price_min) params.price_min = filters.price_min;
     if (filters.price_max) params.price_max = filters.price_max;
     if (filters.property_type) params.property_type = filters.property_type;

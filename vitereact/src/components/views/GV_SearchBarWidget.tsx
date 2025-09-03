@@ -176,7 +176,7 @@ const GV_SearchBarWidget: React.FC = () => {
   
   // Generate date options
   const generateDateOptions = (isCheckIn: boolean) => {
-    const dates = [];
+    const dates: string[] = [];
     const today = new Date();
     
     // Start from today or check-in date

@@ -836,17 +836,17 @@ const UV_AdminPanel: React.FC = () => {
                               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <button
                                   onClick={() => suspendUserMutation.mutate(user.user_id)}
-                                  disabled={suspendUserMutation.isLoading}
+                                  disabled={suspendUserMutation.isPending}
                                   className="text-indigo-600 hover:text-indigo-900 mr-3"
                                 >
-                                  {suspendUserMutation.isLoading ? 'Suspending...' : 'Suspend'}
+                                  {suspendUserMutation.isPending ? 'Suspending...' : 'Suspend'}
                                 </button>
                                 <button
                                   onClick={() => deleteUserMutation.mutate(user.user_id)}
-                                  disabled={deleteUserMutation.isLoading}
+                                  disabled={deleteUserMutation.isPending}
                                   className="text-red-600 hover:text-red-900"
                                 >
-                                  {deleteUserMutation.isLoading ? 'Deleting...' : 'Delete'}
+                                  {deleteUserMutation.isPending ? 'Deleting...' : 'Delete'}
                                 </button>
                               </td>
                             </tr>
@@ -929,10 +929,10 @@ const UV_AdminPanel: React.FC = () => {
                               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <button
                                   onClick={() => deletePropertyMutation.mutate(property.property_id)}
-                                  disabled={deletePropertyMutation.isLoading}
+                                  disabled={deletePropertyMutation.isPending}
                                   className="text-red-600 hover:text-red-900"
                                 >
-                                  {deletePropertyMutation.isLoading ? 'Deleting...' : 'Delete'}
+                                  {deletePropertyMutation.isPending ? 'Deleting...' : 'Delete'}
                                 </button>
                               </td>
                             </tr>
@@ -1020,10 +1020,10 @@ const UV_AdminPanel: React.FC = () => {
                                 {booking.status !== 'refunded' && (
                                   <button
                                     onClick={() => refundBookingMutation.mutate(booking.booking_id)}
-                                    disabled={refundBookingMutation.isLoading}
+                                    disabled={refundBookingMutation.isPending}
                                     className="text-indigo-600 hover:text-indigo-900"
                                   >
-                                    {refundBookingMutation.isLoading ? 'Processing...' : 'Refund'}
+                                    {refundBookingMutation.isPending ? 'Processing...' : 'Refund'}
                                   </button>
                                 )}
                               </td>
@@ -1112,10 +1112,10 @@ const UV_AdminPanel: React.FC = () => {
                               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <button
                                   onClick={() => removeReviewMutation.mutate(review.review_id)}
-                                  disabled={removeReviewMutation.isLoading}
+                                  disabled={removeReviewMutation.isPending}
                                   className="text-red-600 hover:text-red-900"
                                 >
-                                  {removeReviewMutation.isLoading ? 'Removing...' : 'Remove'}
+                                  {removeReviewMutation.isPending ? 'Removing...' : 'Remove'}
                                 </button>
                               </td>
                             </tr>

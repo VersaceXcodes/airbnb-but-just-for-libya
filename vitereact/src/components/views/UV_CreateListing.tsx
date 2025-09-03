@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppStore } from '@/store/main';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { z } from 'zod';
-import { createPropertyInputSchema } from '@/schemas/zodSchemas';
+// Removed unused imports
 
 // Libya-specific cities
 const LIBYAN_CITIES = [
@@ -70,7 +69,7 @@ const UV_CreateListing: React.FC = () => {
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
   const [photos, setPhotos] = useState<File[]>([]);
   const [photoPreviews, setPhotoPreviews] = useState<string[]>([]);
-  const [uploadedPhotoUrls, setUploadedPhotoUrls] = useState<string[]>([]);
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -279,8 +278,8 @@ const UV_CreateListing: React.FC = () => {
         latitude: null,
         longitude: null,
         house_rules: listingData.house_rules || null,
-        neighborhood: listingData.neighborhood || null,
-        address: listingData.address || null
+        neighborhood: listingData.neighborhood || '',
+        address: listingData.address || ''
       };
       
       createPropertyMutation.mutate(submissionData);

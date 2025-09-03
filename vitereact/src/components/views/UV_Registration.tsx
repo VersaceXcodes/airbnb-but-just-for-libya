@@ -58,7 +58,7 @@ const UV_Registration: React.FC = () => {
   
   // Validate form fields
   const validateForm = () => {
-    const errors = {
+    const errors: Record<string, string | null> = {
       email: null,
       phone_number: null,
       password_hash: null,
@@ -207,7 +207,7 @@ const UV_Registration: React.FC = () => {
         bio: formValues.bio,
         emergency_contact_name: formValues.emergency_contact_name,
         emergency_contact_phone: formValues.emergency_contact_phone,
-        role: registrationType,
+        role: registrationType === 'guest' ? 'traveler' : registrationType,
       });
       
       // Navigate to dashboard after successful registration

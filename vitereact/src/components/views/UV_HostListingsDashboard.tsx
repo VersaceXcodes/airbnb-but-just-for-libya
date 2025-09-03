@@ -436,14 +436,14 @@ const UV_HostListingsDashboard: React.FC = () => {
                   
                   <button
                     onClick={() => toggleListingStatus(listing.property_id, listing.is_active)}
-                    disabled={updateListingStatusMutation.isLoading}
+                    disabled={updateListingStatusMutation.isPending}
                     className={`inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
                       listing.is_active
                         ? 'bg-red-600 hover:bg-red-700'
                         : 'bg-green-600 hover:bg-green-700'
                     }`}
                   >
-                    {updateListingStatusMutation.isLoading 
+                    {updateListingStatusMutation.isPending 
                       ? 'Updating...' 
                       : listing.is_active 
                         ? 'Deactivate' 
