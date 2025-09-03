@@ -229,11 +229,10 @@ const UV_CreateReview: React.FC = () => {
       // Upload photos if any
       if (uploadedPhotos.length > 0) {
         try {
-          for (const photo of uploadedPhotos) {
-            const photoUrl = await uploadPhoto(photo, data.review_id);
-            await createReviewPhoto(photoUrl, data.review_id);
-          }
-        } catch (error) {
+for (const photo of uploadedPhotos) {
+        const photoUrl = await uploadPhoto(photo);
+        await createReviewPhoto(photoUrl, data.review_id);
+      }        } catch (error) {
           console.error('Error uploading photos:', error);
           // We don't fail the entire review if photos fail
         }

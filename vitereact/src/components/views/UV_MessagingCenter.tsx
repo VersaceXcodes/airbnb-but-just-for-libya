@@ -24,11 +24,7 @@ interface Message {
   created_at: string;
 }
 
-interface User {
-  user_id: string;
-  name: string;
-  profile_picture_url: string | null;
-}
+
 
 const UV_MessagingCenter: React.FC = () => {
   // Global state access

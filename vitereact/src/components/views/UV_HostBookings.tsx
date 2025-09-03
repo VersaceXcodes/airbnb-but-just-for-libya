@@ -28,6 +28,9 @@ const UV_HostBookings: React.FC = () => {
   const currentUser = useAppStore(state => state.authentication_state.current_user);
   const authToken = useAppStore(state => state.authentication_state.auth_token);
   
+  // Query client
+  const queryClient = useQueryClient();
+  
   // Local state
   const [activeTab, setActiveTab] = useState<'pending' | 'confirmed' | 'history'>('pending');
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
@@ -249,12 +252,7 @@ const UV_HostBookings: React.FC = () => {
     }
   };
   
-  // Handle cancel booking
-  const handleCancelBooking = (bookingId: string) => {
-    if (window.confirm('Are you sure you want to cancel this booking?')) {
-      cancelBookingMutation.mutate(bookingId);
-    }
-  };
+
   
   // Format date for display
   const formatDate = (dateString: string) => {

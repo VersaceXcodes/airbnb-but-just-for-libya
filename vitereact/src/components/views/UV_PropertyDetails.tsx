@@ -305,7 +305,7 @@ const UV_PropertyDetails: React.FC = () => {
         host_id: property.host_id
       };
       
-      const response = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'}/api/conversations`,
         conversationData,
         {
