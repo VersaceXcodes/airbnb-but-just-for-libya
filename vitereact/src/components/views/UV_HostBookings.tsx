@@ -193,43 +193,7 @@ const UV_HostBookings: React.FC = () => {
     }
   });
   
-  // Cancel booking mutation
-  const cancelBookingMutation = useMutation({
-    mutationFn: async (bookingId: string) => {
-      if (!authToken) throw new Error('No auth token');
-      
-      const response = await axios.patch(
-        `${apiBaseUrl}/api/bookings/${bookingId}`,
-        { status: 'cancelled' },
-        {
-          headers: { Authorization: `Bearer ${authToken}` }
-        }
-      );
-      
-      return response.data as Booking;
-    },
-    onSuccess: (data) => {
-      // Update local state
-      queryClient.setQueryData(
-        ['hostBookings', 'confirmed', currentUser?.user_id],
-        (oldData: Booking[] | undefined) => 
-          oldData?.filter(booking => booking.booking_id !== data.booking_id) || []
-      );
-      
-      queryClient.setQueryData(
-        ['hostBookings', 'history', currentUser?.user_id],
-        (oldData: Booking[] | undefined) => 
-          [...(oldData || []), data]
-      );
-      
-      // Close modal
-      setSelectedBooking(null);
-    },
-    onError: (error) => {
-      console.error('Error cancelling booking:', error);
-      alert('Failed to cancel booking. Please try again.');
-    }
-  });
+  
   
   // Handle approve booking
   const handleApproveBooking = (bookingId: string) => {
@@ -271,14 +235,7 @@ const UV_HostBookings: React.FC = () => {
     }).format(amount);
   };
   
-  // Calculate booking duration
-  const getBookingDuration = (checkIn: string, checkOut: string) => {
-    const start = new Date(checkIn);
-    const end = new Date(checkOut);
-    const diffTime = Math.abs(end.getTime() - start.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays;
-  };
+  
   
   // Render booking request card
   const renderBookingRequestCard = (booking: Booking) => (

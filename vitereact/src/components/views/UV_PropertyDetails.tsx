@@ -492,7 +492,7 @@ const UV_PropertyDetails: React.FC = () => {
   
   // Generate calendar days
   const generateCalendarDays = () => {
-    const days = [];
+    const days: JSX.Element[] = [];
     const today = new Date();
     const startDate = new Date(today.getFullYear(), today.getMonth(), 1);
     const endDate = new Date(today.getFullYear(), today.getMonth() + 2, 0);
@@ -785,11 +785,11 @@ const UV_PropertyDetails: React.FC = () => {
                     )}
                   </div>
                   <div className="ml-3">
-                    <p className="text-lg font-medium text-gray-900 capitalize">{property.cancellation_policy}</p>
+                    <p className="text-lg font-medium text-gray-900 capitalize">{property?.cancellation_policy}</p>
                     <p className="text-gray-600 mt-1">
-                      {property.cancellation_policy === 'flexible' 
+                      {property?.cancellation_policy === 'flexible' 
                         ? 'Free cancellation up to 24 hours before check-in' 
-                        : property.cancellation_policy === 'moderate' 
+                        : property?.cancellation_policy === 'moderate' 
                           ? 'Free cancellation up to 7 days before check-in' 
                           : 'Non-refundable'}
                     </p>
