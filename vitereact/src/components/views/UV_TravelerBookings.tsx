@@ -241,8 +241,7 @@ const UV_TravelerBookings: React.FC = () => {
       case 'completed':
         // Check if user has reviewed this booking (simplified check)
         // In a real app, you'd fetch actual review status
-        {
-          const hasReview = false; // Placeholder
+        const hasReview = false; // Placeholder
         
         return (
           <div className="flex flex-wrap gap-2">
