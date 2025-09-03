@@ -125,7 +125,7 @@ type WebSocketEvents =
   | 'booking:declined'
   | 'booking:cancelled';
 
-// Store State
+  // Store State
 interface AppState {
   // Global state variables
   authentication_state: AuthenticationState;
@@ -133,6 +133,8 @@ interface AppState {
   booking_cart: BookingCart;
   user_role: UserRole;
   notification_count: NotificationCount;
+  currentLanguage: string;
+  currentCurrency: string;
   
   // WebSocket connection
   websocket_connection: Socket | null;
@@ -162,12 +164,14 @@ interface AppState {
   increment_notification_count: () => void;
   decrement_notification_count: () => void;
   
+  // Language actions
+  setLanguage: (language: string) => void;
+  
   // WebSocket actions
   connect_websocket: (token: string) => void;
   disconnect_websocket: () => void;
   subscribe_to_events: () => void;
 }
-
 // Create the store
 export const useAppStore = create<AppState>()(
   persist(
@@ -213,6 +217,8 @@ export const useAppStore = create<AppState>()(
       
       websocket_connection: null,
       websocket_connected: false,
+      currentLanguage: 'ar',
+      currentCurrency: 'LYD',
       
       // Authentication actions
       login_user: async (email: string, password: string) => {
@@ -499,7 +505,12 @@ export const useAppStore = create<AppState>()(
         }));
       },
       
-      // WebSocket actions
+      // Language actions
+      setLanguage: (language: string) => {
+        set(() => ({
+          currentLanguage: language,
+        }));
+      },
       connect_websocket: (token: string) => {
         // Disconnect existing connection if any
         if (get().websocket_connection) {

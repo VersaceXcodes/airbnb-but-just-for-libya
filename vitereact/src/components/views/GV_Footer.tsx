@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { useAppStore } from '@/store/main';
 
 const GV_Footer: React.FC = () => {
-  const currentLanguage = useAppStore(state => state.locale || 'ar');
-  const currentCurrency = useAppStore(state => state.currency || 'LYD');
+  const currentLanguage = useAppStore(state => state.currentLanguage || 'ar');
+  const currentCurrency = useAppStore(state => state.currentCurrency || 'LYD');
   
-  const changeLanguage = useAppStore(state => state.changeLanguage);
+  const changeLanguage = useAppStore(state => state.setLanguage);
 
   const handleLanguageChange = (lang: string) => {
     changeLanguage(lang);
