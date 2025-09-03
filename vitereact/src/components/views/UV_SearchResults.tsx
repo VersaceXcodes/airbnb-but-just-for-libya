@@ -102,7 +102,7 @@ const UV_SearchResults: React.FC = () => {
     if (filters.price_max) params.price_max = filters.price_max;
     if (filters.property_type) params.property_type = filters.property_type;
     if (filters.amenities.length > 0) params.amenities = filters.amenities.join(',');
-    if (filters.instant_book !== null) params.instant_book = filters.instant_book;
+    if (filters.instant_book !== null) params.instant_book = filters.instant_book.toString();
     if (filters.sort_by) params.sort_by = filters.sort_by;
     
     const response = await axios.get<SearchPropertyResponse>(

@@ -56,9 +56,49 @@ const UV_Registration: React.FC = () => {
     }
   }, [isAuthenticated, navigate]);
   
-  // Validate form fields
+// Validate form fields
   const validateForm = () => {
     const errors: Record<string, string | null> = {};
+    
+    // Email validation
+    if (!formValues.email) {
+      errors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
+      errors.email = 'Email address is invalid';
+    }
+    
+    // Phone validation
+    if (!formValues.phone_number) {
+      errors.phone_number = 'Phone number is required';
+    } else if (!/^\+?[0-9]{10,15}$/.test(formValues.phone_number)) {
+      errors.phone_number = 'Phone number is invalid';
+    }
+    
+    // Password validation
+    if (!formValues.password_hash) {
+      errors.password_hash = 'Password is required';
+    } else if (formValues.password_hash.length < 8) {
+      errors.password_hash = 'Password must be at least 8 characters';
+    }
+    
+    // Name validation
+    if (!formValues.name) {
+      errors.name = 'Full name is required';
+    } else if (formValues.name.length < 2) {
+      errors.name = 'Full name must be at least 2 characters';
+    }
+    
+    setFormErrors({
+      email: errors.email || null,
+      phone_number: errors.phone_number || null,
+      password_hash: errors.password_hash || null,
+      name: errors.name || null,
+      verification_code: null,
+    });
+    
+    // Check if all required fields are valid
+    return !errors.email && !errors.phone_number && !errors.password_hash && !errors.name;
+  };
     
     // Email validation
     if (!formValues.email) {
