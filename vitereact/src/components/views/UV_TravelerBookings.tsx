@@ -1,26 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { useAppStore } from '@/store/main';
 import { Link, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 
 // Zod schema derived TypeScript interfaces
-interface User {
-  user_id: string;
-  email: string;
-  phone_number: string;
-  password_hash: string;
-  name: string;
-  profile_picture_url: string | null;
-  bio: string | null;
-  emergency_contact_name: string | null;
-  emergency_contact_phone: string | null;
-  role: 'traveler' | 'host' | 'admin' | 'both';
-  is_verified: boolean;
-  verification_document_url: string | null;
-  created_at: string;
-  updated_at: string;
-}
+
 
 interface Property {
   property_id: string;
@@ -77,7 +62,7 @@ interface Conversation {
 
 const UV_TravelerBookings: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const queryClient = useQueryClient();
+  
   
   // Get authentication state
   const currentUser = useAppStore(state => state.authentication_state.current_user);
