@@ -96,7 +96,7 @@ const UV_PropertyDetails: React.FC = () => {
   const currentUser = useAppStore(state => state.authentication_state.current_user);
   const authToken = useAppStore(state => state.authentication_state.auth_token);
   const bookingCart = useAppStore(state => state.booking_cart);
-  const updateBookingCart = useAppStore(state => state.update_booking_cart);
+  
   
   // Local state
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number>(0);
@@ -122,7 +122,7 @@ const UV_PropertyDetails: React.FC = () => {
   });
   
   // Fetch property photos
-  const { data: photos = [], isLoading: photosLoading } = useQuery<PropertyPhoto[]>({
+  const { data: photos = [] } = useQuery<PropertyPhoto[]>({
     queryKey: ['property-photos', property_id],
     queryFn: async () => {
       const response = await axios.get(
@@ -134,7 +134,7 @@ const UV_PropertyDetails: React.FC = () => {
   });
   
   // Fetch host information
-  const { data: host, isLoading: hostLoading } = useQuery<User>({
+  const { data: host } = useQuery<User>({
     queryKey: ['host', property?.host_id],
     queryFn: async () => {
       const response = await axios.get(
@@ -146,7 +146,7 @@ const UV_PropertyDetails: React.FC = () => {
   });
   
   // Fetch property reviews
-  const { data: reviews = [], isLoading: reviewsLoading } = useQuery<Review[]>({
+  const { data: reviews = [] } = useQuery<Review[]>({
     queryKey: ['property-reviews', property_id],
     queryFn: async () => {
       const response = await axios.get(
@@ -803,7 +803,7 @@ const UV_PropertyDetails: React.FC = () => {
                   <h2 className="text-2xl font-semibold text-gray-900">Reviews</h2>
                   {averageRatings && (
                     <div className="flex items-center">
-                      {renderStars(averageRatings.overall)}
+                      {averageRatings && renderStars(averageRatings.overall)}
                       <span className="ml-2 text-gray-600">({reviews.length} reviews)</span>
                     </div>
                   )}
@@ -934,9 +934,8 @@ const UV_PropertyDetails: React.FC = () => {
                   </div>
                   {averageRatings && (
                     <div className="flex items-center">
-                      {renderStars(averageRatings.overall)}
-                      <span className="ml-1 text-sm text-gray-600">({reviews.length})</span>
-                    </div>
+{averageRatings && renderStars(averageRatings.overall)}
+                       <span className="ml-1 text-sm text-gray-600">({reviews.length})</span>                    </div>
                   )}
                 </div>
                 

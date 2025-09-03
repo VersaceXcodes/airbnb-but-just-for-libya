@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 
 import axios from 'axios';
 import { useAppStore } from '@/store/main';
@@ -77,14 +77,11 @@ const UV_HostBookings: React.FC = () => {
   const [declineReason, setDeclineReason] = useState('');
   const [calendarViewMode, setCalendarViewMode] = useState<'month' | 'week' | 'day'>('month');
   
-  // Query client for cache invalidation
-  const queryClient = useQueryClient();
-  
   // API base URL
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
   
   // Fetch pending booking requests
-  const { data: pendingBookings = [], isLoading: isLoadingPending, refetch: refetchPending } = useQuery({
+  const { data: pendingBookings = [], isLoading: isLoadingPending } = useQuery({
     queryKey: ['hostBookings', 'pending', currentUser?.user_id],
     queryFn: async () => {
       if (!currentUser?.user_id || !authToken) return [];
@@ -109,7 +106,7 @@ const UV_HostBookings: React.FC = () => {
   });
   
   // Fetch confirmed bookings
-  const { data: confirmedBookings = [], isLoading: isLoadingConfirmed, refetch: refetchConfirmed } = useQuery({
+  const { data: confirmedBookings = [], isLoading: isLoadingConfirmed } = useQuery({
     queryKey: ['hostBookings', 'confirmed', currentUser?.user_id],
     queryFn: async () => {
       if (!currentUser?.user_id || !authToken) return [];
@@ -134,7 +131,7 @@ const UV_HostBookings: React.FC = () => {
   });
   
   // Fetch booking history (completed and cancelled)
-  const { data: bookingHistory = [], isLoading: isLoadingHistory, refetch: refetchHistory } = useQuery({
+  const { data: bookingHistory = [], isLoading: isLoadingHistory } = useQuery({
     queryKey: ['hostBookings', 'history', currentUser?.user_id],
     queryFn: async () => {
       if (!currentUser?.user_id || !authToken) return [];
@@ -158,43 +155,7 @@ const UV_HostBookings: React.FC = () => {
     retry: 1
   });
   
-  // Fetch guest information
-  const fetchGuestInfo = async (guestId: string) => {
-    if (!authToken) return null;
-    
-    try {
-      const response = await axios.get(
-        `${apiBaseUrl}/api/users/${guestId}`,
-        {
-          headers: { Authorization: `Bearer ${authToken}` }
-        }
-      );
-      
-      return response.data as User;
-    } catch (error) {
-      console.error('Error fetching guest info:', error);
-      return null;
-    }
-  };
   
-  // Fetch property information
-  const fetchPropertyInfo = async (propertyId: string) => {
-    if (!authToken) return null;
-    
-    try {
-      const response = await axios.get(
-        `${apiBaseUrl}/api/properties/${propertyId}`,
-        {
-          headers: { Authorization: `Bearer ${authToken}` }
-        }
-      );
-      
-      return response.data as Property;
-    } catch (error) {
-      console.error('Error fetching property info:', error);
-      return null;
-    }
-  };
   
   // Approve booking mutation
   const approveBookingMutation = useMutation({
@@ -405,48 +366,7 @@ const UV_HostBookings: React.FC = () => {
     </div>
   );
   
-  // Render confirmed booking card
-  const renderConfirmedBookingCard = (booking: Booking) => (
-    <div key={booking.booking_id} className="border rounded-lg p-4 mb-4 shadow-sm hover:shadow-md transition-shadow">
-      <div className="flex justify-between items-start">
-        <div>
-          <h3 className="text-lg font-semibold">Booking #{booking.booking_id.substring(0, 8)}</h3>
-          <p className="text-gray-600">{formatDate(booking.check_in)} - {formatDate(booking.check_out)}</p>
-          <p className="text-gray-600">
-            {getBookingDuration(booking.check_in, booking.check_out)} night{getBookingDuration(booking.check_in, booking.check_out) !== 1 ? 's' : ''}
-          </p>
-        </div>
-        <div className="text-right">
-          <p className="text-lg font-bold">{formatCurrency(booking.total_price)}</p>
-          <p className="text-sm text-gray-500">+{formatCurrency(booking.service_fee)} service fee</p>
-        </div>
-      </div>
-      
-      {booking.special_requests && (
-        <div className="mt-2 p-2 bg-blue-50 rounded">
-          <p className="text-sm text-blue-800">
-            <span className="font-medium">Special requests:</span> {booking.special_requests}
-          </p>
-        </div>
-      )}
-      
-      <div className="mt-4 flex space-x-2">
-        <button
-          onClick={() => setSelectedBooking(booking)}
-          className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors"
-        >
-          View Details
-        </button>
-        <button
-          onClick={() => handleCancelBooking(booking.booking_id)}
-          disabled={cancelBookingMutation.isPending}
-          className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition-colors disabled:opacity-50"
-        >
-          {cancelBookingMutation.isPending ? 'Cancelling...' : 'Cancel'}
-        </button>
-      </div>
-    </div>
-  );
+  
   
   // Render booking history card
   const renderHistoryBookingCard = (booking: Booking) => (

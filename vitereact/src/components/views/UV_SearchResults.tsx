@@ -173,11 +173,7 @@ const UV_SearchResults: React.FC = () => {
     setCurrentPage(1);
   };
 
-  // Format amenities string for display
-  const formatAmenities = (amenities: string | null) => {
-    if (!amenities) return [];
-    return amenities.split(',').map(a => a.trim()).filter(a => a.length > 0);
-  };
+  
 
   // Pagination controls
   const totalPages = data ? Math.ceil(data.total_count / 10) : 1;

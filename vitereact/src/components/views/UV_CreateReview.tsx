@@ -36,14 +36,6 @@ interface ReviewInput {
   comment: string | null;
 }
 
-interface ReviewPhoto {
-  photo_id: string;
-  review_id: string;
-  photo_url: string;
-  caption: string | null;
-  created_at: string;
-}
-
 interface Property {
   property_id: string;
   title: string;

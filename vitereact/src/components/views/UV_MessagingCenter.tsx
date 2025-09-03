@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { format, isToday, isYesterday } from 'date-fns';
 import { useAppStore } from '@/store/main';
@@ -46,7 +46,7 @@ const UV_MessagingCenter: React.FC = () => {
   const [isLoadingMessages, setIsLoadingMessages] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
-  const queryClient = useQueryClient();
+  
   
   // API base URL
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';

@@ -25,7 +25,7 @@ const UV_PasswordReset: React.FC = () => {
   const [searchParams] = useSearchParams();
   const resetToken = searchParams.get('token');
   
-  const navigate = useNavigate();
+  
 
   // Validate token on component mount if present
   useEffect(() => {

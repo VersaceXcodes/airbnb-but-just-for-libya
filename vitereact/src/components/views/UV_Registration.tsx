@@ -58,13 +58,7 @@ const UV_Registration: React.FC = () => {
   
   // Validate form fields
   const validateForm = () => {
-    const errors: Record<string, string | null> = {
-      email: null,
-      phone_number: null,
-      password_hash: null,
-      name: null,
-      verification_code: null,
-    };
+    const errors: Record<string, string | null> = {};
     
     // Email validation
     if (!formValues.email) {
