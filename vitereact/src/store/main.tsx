@@ -606,6 +606,9 @@ export const useAppStore = create<AppState>()(
   )
 );
 
+// Export interfaces
+export type { User, Property, Booking, Notification };
+
 // Export utility functions
 export const isAuthenticated = (state: AppState) => 
   state.authentication_state.authentication_status.is_authenticated;

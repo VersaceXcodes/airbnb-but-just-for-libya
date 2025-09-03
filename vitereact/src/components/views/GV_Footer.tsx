@@ -4,7 +4,6 @@ import { useAppStore } from '@/store/main';
 
 const GV_Footer: React.FC = () => {
   const currentLanguage = useAppStore(state => state.currentLanguage || 'ar');
-  const currentCurrency = useAppStore(state => state.currentCurrency || 'LYD');
   
   const changeLanguage = useAppStore(state => state.setLanguage);
 
