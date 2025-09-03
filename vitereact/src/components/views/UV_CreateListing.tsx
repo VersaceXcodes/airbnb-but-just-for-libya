@@ -255,7 +255,7 @@ const UV_CreateListing: React.FC = () => {
       );
       return response.data;
     },
-    onSuccess: (createdProperty) => {
+    onSuccess: () => {
       // In a real implementation, we would upload photos here
       // For now, we'll just navigate to the dashboard
       navigate('/dashboard/listings');

@@ -98,8 +98,7 @@ const UV_AdminPanel: React.FC = () => {
   const currentUser = useAppStore(state => state.authentication_state.current_user);
   const authToken = useAppStore(state => state.authentication_state.auth_token);
   
-  // Query client for cache invalidation
-  const queryClient = useQueryClient();
+  
   
   // Local state
   const [dashboardMetrics, setDashboardMetrics] = useState<DashboardMetrics>({
