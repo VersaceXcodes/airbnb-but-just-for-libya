@@ -277,7 +277,7 @@ export const createBookingInputSchema = z.object({
   total_price: z.number().nonnegative(),
   service_fee: z.number().nonnegative(),
   special_requests: z.string().max(500).nullable().optional(),
-  status: z.enum(['pending', 'confirmed', 'cancelled', 'completed']).default('pending')
+  status: z.enum(['pending', 'confirmed', 'declined', 'cancelled', 'completed']).default('pending')
 });
 
 export const updateBookingInputSchema = z.object({
@@ -291,14 +291,13 @@ export const updateBookingInputSchema = z.object({
   total_price: z.number().nonnegative().optional(),
   service_fee: z.number().nonnegative().optional(),
   special_requests: z.string().max(500).nullable().optional(),
-  status: z.enum(['pending', 'confirmed', 'cancelled', 'completed']).optional()
-});
+  status: z.enum(['pending', 'confirmed', 'declined', 'cancelled', 'completed']).optional()});
 
 export const searchBookingInputSchema = z.object({
   property_id: z.string().optional(),
   guest_id: z.string().optional(),
   host_id: z.string().optional(),
-  status: z.enum(['pending', 'confirmed', 'cancelled', 'completed']).optional(),
+  status: z.enum(['pending', 'confirmed', 'declined', 'cancelled', 'completed']).optional(),
   start_date: z.coerce.date().optional(),
   end_date: z.coerce.date().optional(),
   limit: z.number().int().positive().default(10),

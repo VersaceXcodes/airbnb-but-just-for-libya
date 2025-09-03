@@ -13,6 +13,44 @@ import { nanoid } from 'nanoid';
 import pkg from 'pg';
 const { Pool } = pkg;
 
+// Type definitions
+interface JwtPayload {
+  user_id: string;
+  userId?: string;
+  role: string;
+  iat?: number;
+  exp?: number;
+}
+
+interface User {
+  user_id: string;
+  email: string;
+  name: string;
+  role: string;
+  created_at?: string;
+}
+
+interface NotificationData {
+  user_id?: string;
+  type?: string;
+  title?: string;
+  message?: string;
+}
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: User;
+    }
+  }
+}
+
+declare module 'socket.io' {
+  interface Socket {
+    user?: User;
+  }
+}
+
 // Import Zod schemas
 import {
   userSchema, createUserInputSchema, updateUserInputSchema, searchUserInputSchema,
@@ -44,7 +82,7 @@ const io = new Server(server, {
   }
 });
 
-const port = process.env.PORT || 3000;
+const port = parseInt(process.env.PORT || '3000');
 
 // Database setup
 const { DATABASE_URL, PGHOST, PGDATABASE, PGUSER, PGPASSWORD, PGPORT = 5432, JWT_SECRET = 'your-secret-key' } = process.env;
@@ -53,7 +91,7 @@ const pool = new Pool(
   DATABASE_URL
     ? { 
         connectionString: DATABASE_URL, 
-        ssl: { require: true } 
+        ssl: { rejectUnauthorized: false } 
       }
     : {
         host: PGHOST,
@@ -61,7 +99,7 @@ const pool = new Pool(
         user: PGUSER,
         password: PGPASSWORD,
         port: Number(PGPORT),
-        ssl: { require: true },
+        ssl: { rejectUnauthorized: false },
       }
 );
 
@@ -153,8 +191,9 @@ const authenticateToken = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    const result = await pool.query('SELECT user_id, email, name, role, created_at FROM users WHERE user_id = $1', [decoded.user_id]);
+    const decoded = jwt.verify(token, JWT_SECRET) as JwtPayload;
+    const userId = decoded.user_id || decoded.userId;
+    const result = await pool.query('SELECT user_id, email, name, role, created_at FROM users WHERE user_id = $1', [userId]);
     
     if (result.rows.length === 0) {
       return res.status(401).json(createErrorResponse('Invalid token', null, 'AUTH_TOKEN_INVALID'));
@@ -178,8 +217,9 @@ io.use(async (socket, next) => {
       return next(new Error('Authentication token required'));
     }
 
-    const decoded = jwt.verify(token, JWT_SECRET);
-    const result = await pool.query('SELECT user_id, email, name, role FROM users WHERE user_id = $1', [decoded.user_id]);
+    const decoded = jwt.verify(token, JWT_SECRET) as JwtPayload;
+    const userId = decoded.user_id || decoded.userId;
+    const result = await pool.query('SELECT user_id, email, name, role FROM users WHERE user_id = $1', [userId]);
     
     if (result.rows.length === 0) {
       return next(new Error('Invalid token'));
@@ -451,6 +491,7 @@ app.get('/api/users/:user_id/bookings', authenticateToken, async (req, res) => {
   try {
     const { user_id } = req.params;
     const { status } = req.query;
+    const statusStr = status as string;
 
     // Check access
     if (req.user.user_id !== user_id && req.user.role !== 'admin') {
@@ -460,9 +501,9 @@ app.get('/api/users/:user_id/bookings', authenticateToken, async (req, res) => {
     let query = `SELECT * FROM bookings WHERE (guest_id = $1 OR host_id = $1)`;
     const queryParams = [user_id];
 
-    if (status) {
+    if (statusStr) {
       query += ` AND status = $2`;
-      queryParams.push(status);
+      queryParams.push(statusStr);
     }
 
     query += ` ORDER BY created_at DESC`;
@@ -507,17 +548,17 @@ app.get('/api/properties', async (req, res) => {
   try {
     // Coerce query parameters to proper types
     const searchParams = {
-      location: req.query.location,
-      check_in: req.query.check_in,
-      check_out: req.query.check_out,
-      guests: req.query.guests ? parseInt(req.query.guests) || undefined : undefined,
-      price_min: req.query.price_min ? parseFloat(req.query.price_min) || undefined : undefined,
-      price_max: req.query.price_max ? parseFloat(req.query.price_max) || undefined : undefined,
-      property_type: req.query.property_type,
-      amenities: req.query.amenities,
-      sort_by: req.query.sort_by,
-      limit: parseInt(req.query.limit) || 10,
-      offset: parseInt(req.query.offset) || 0
+      location: req.query.location as string,
+      check_in: req.query.check_in as string,
+      check_out: req.query.check_out as string,
+      guests: req.query.guests ? parseInt(req.query.guests as string) || undefined : undefined,
+      price_min: req.query.price_min ? parseFloat(req.query.price_min as string) || undefined : undefined,
+      price_max: req.query.price_max ? parseFloat(req.query.price_max as string) || undefined : undefined,
+      property_type: req.query.property_type as string,
+      amenities: req.query.amenities as string,
+      sort_by: req.query.sort_by as string,
+      limit: parseInt((req.query.limit as string) || '10'),
+      offset: parseInt((req.query.offset as string) || '0')
     };
 
     const {
@@ -962,13 +1003,15 @@ app.get('/api/properties/:property_id/availability', async (req, res) => {
   try {
     const { property_id } = req.params;
     const { start_date, end_date } = req.query;
+    const startDateStr = start_date as string;
+    const endDateStr = end_date as string;
 
     let query = `SELECT * FROM property_availability WHERE property_id = $1`;
     const queryParams = [property_id];
 
-    if (start_date && end_date) {
+    if (startDateStr && endDateStr) {
       query += ` AND date BETWEEN $2 AND $3`;
-      queryParams.push(start_date, end_date);
+      queryParams.push(startDateStr, endDateStr);
     }
 
     query += ` ORDER BY date ASC`;
@@ -1061,14 +1104,14 @@ app.get('/api/bookings', authenticateToken, async (req, res) => {
   try {
     // Coerce query parameters to proper types
     const bookingParams = {
-      property_id: req.query.property_id,
-      guest_id: req.query.guest_id,
-      host_id: req.query.host_id,
-      status: req.query.status,
-      start_date: req.query.start_date,
-      end_date: req.query.end_date,
-      limit: parseInt(req.query.limit) || 10,
-      offset: parseInt(req.query.offset) || 0
+      property_id: req.query.property_id as string,
+      guest_id: req.query.guest_id as string,
+      host_id: req.query.host_id as string,
+      status: req.query.status as string,
+      start_date: req.query.start_date as string,
+      end_date: req.query.end_date as string,
+      limit: parseInt((req.query.limit as string) || '10'),
+      offset: parseInt((req.query.offset as string) || '0')
     };
 
     const {
@@ -1119,7 +1162,7 @@ app.get('/api/bookings', authenticateToken, async (req, res) => {
     }
 
     query += ` ORDER BY created_at DESC LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
-    queryParams.push(parseInt(limit), parseInt(offset));
+    queryParams.push(limit.toString(), offset.toString());
 
     const result = await pool.query(query, queryParams);
 
@@ -1300,7 +1343,7 @@ app.patch('/api/bookings/:booking_id', authenticateToken, async (req, res) => {
       const now = new Date().toISOString();
       const notification_id = `not_${nanoid()}`;
       
-      let notificationData = {};
+      let notificationData: NotificationData = {};
       
       if (updateData.status === 'confirmed') {
         notificationData = {
@@ -1515,8 +1558,8 @@ app.get('/api/conversations', authenticateToken, async (req, res) => {
   try {
     // Coerce query parameters to proper types
     const convParams = {
-      limit: parseInt(req.query.limit) || 10,
-      offset: parseInt(req.query.offset) || 0
+      limit: parseInt((req.query.limit as string) || '10'),
+      offset: parseInt((req.query.offset as string) || '0')
     };
 
     const { limit, offset } = convParams;
@@ -1575,8 +1618,8 @@ app.get('/api/conversations/:conversation_id/messages', authenticateToken, async
     const { conversation_id } = req.params;
     // Coerce query parameters to proper types
     const msgParams = {
-      limit: parseInt(req.query.limit) || 20,
-      offset: parseInt(req.query.offset) || 0
+      limit: parseInt((req.query.limit as string) || '20'),
+      offset: parseInt((req.query.offset as string) || '0')
     };
 
     const { limit, offset } = msgParams;
@@ -1749,9 +1792,9 @@ app.get('/api/notifications', authenticateToken, async (req, res) => {
   try {
     // Coerce query parameters to proper types
     const notifParams = {
-      is_read: req.query.is_read,
-      limit: parseInt(req.query.limit) || 10,
-      offset: parseInt(req.query.offset) || 0
+      is_read: req.query.is_read as string,
+      limit: parseInt((req.query.limit as string) || '10'),
+      offset: parseInt((req.query.offset as string) || '0')
     };
 
     const { is_read, limit, offset } = notifParams;
@@ -1762,12 +1805,12 @@ app.get('/api/notifications', authenticateToken, async (req, res) => {
 
     if (is_read !== undefined) {
       query += ` AND is_read = $${paramCount}`;
-      queryParams.push(is_read === 'true');
+      queryParams.push((is_read === 'true').toString());
       paramCount++;
     }
 
     query += ` ORDER BY created_at DESC LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
-    queryParams.push(parseInt(limit), parseInt(offset));
+    queryParams.push(limit.toString(), offset.toString());
 
     const result = await pool.query(query, queryParams);
 
