@@ -243,7 +243,7 @@ export const useAppStore = create<AppState>()(
           
           const { user, token } = response.data;
           
-          set((state) => ({
+          set(() => ({
             authentication_state: {
               current_user: user,
               auth_token: token,
@@ -283,7 +283,7 @@ export const useAppStore = create<AppState>()(
         // Disconnect websocket
         get().disconnect_websocket();
         
-        set((state) => ({
+        set(() => ({
           authentication_state: {
             current_user: null,
             auth_token: null,
@@ -321,7 +321,7 @@ export const useAppStore = create<AppState>()(
           
           const { user, token } = response.data;
           
-          set((state) => ({
+          set(() => ({
             authentication_state: {
               current_user: user,
               auth_token: token,
@@ -383,7 +383,7 @@ export const useAppStore = create<AppState>()(
           
           const { user } = response.data;
           
-          set((state) => ({
+          set(() => ({
             authentication_state: {
               current_user: user,
               auth_token: auth_token,
@@ -402,7 +402,7 @@ export const useAppStore = create<AppState>()(
           get().connect_websocket(auth_token);
         } catch (error) {
           // Token is invalid, clear auth state
-          set((state) => ({
+          set(() => ({
             authentication_state: {
               current_user: null,
               auth_token: null,
