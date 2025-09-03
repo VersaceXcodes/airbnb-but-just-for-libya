@@ -1,5 +1,5 @@
 -- Create tables
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     user_id TEXT PRIMARY KEY,
     email TEXT UNIQUE NOT NULL,
     phone_number TEXT UNIQUE NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE users (
     updated_at TEXT NOT NULL
 );
 
-CREATE TABLE properties (
+CREATE TABLE IF NOT EXISTS properties (
     property_id TEXT PRIMARY KEY,
     host_id TEXT NOT NULL REFERENCES users(user_id),
     title TEXT NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE properties (
     updated_at TEXT NOT NULL
 );
 
-CREATE TABLE property_photos (
+CREATE TABLE IF NOT EXISTS property_photos (
     photo_id TEXT PRIMARY KEY,
     property_id TEXT NOT NULL REFERENCES properties(property_id),
     photo_url TEXT NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE property_photos (
     created_at TEXT NOT NULL
 );
 
-CREATE TABLE property_availability (
+CREATE TABLE IF NOT EXISTS property_availability (
     availability_id TEXT PRIMARY KEY,
     property_id TEXT NOT NULL REFERENCES properties(property_id),
     date TEXT NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE property_availability (
     price_override NUMERIC
 );
 
-CREATE TABLE bookings (
+CREATE TABLE IF NOT EXISTS bookings (
     booking_id TEXT PRIMARY KEY,
     property_id TEXT NOT NULL REFERENCES properties(property_id),
     guest_id TEXT NOT NULL REFERENCES users(user_id),
@@ -77,7 +77,7 @@ CREATE TABLE bookings (
     updated_at TEXT NOT NULL
 );
 
-CREATE TABLE conversations (
+CREATE TABLE IF NOT EXISTS conversations (
     conversation_id TEXT PRIMARY KEY,
     booking_id TEXT NOT NULL REFERENCES bookings(booking_id),
     guest_id TEXT NOT NULL REFERENCES users(user_id),
@@ -86,7 +86,7 @@ CREATE TABLE conversations (
     updated_at TEXT NOT NULL
 );
 
-CREATE TABLE messages (
+CREATE TABLE IF NOT EXISTS messages (
     message_id TEXT PRIMARY KEY,
     conversation_id TEXT NOT NULL REFERENCES conversations(conversation_id),
     sender_id TEXT NOT NULL REFERENCES users(user_id),
@@ -95,7 +95,7 @@ CREATE TABLE messages (
     created_at TEXT NOT NULL
 );
 
-CREATE TABLE reviews (
+CREATE TABLE IF NOT EXISTS reviews (
     review_id TEXT PRIMARY KEY,
     booking_id TEXT NOT NULL REFERENCES bookings(booking_id),
     property_id TEXT NOT NULL REFERENCES properties(property_id),
@@ -113,7 +113,7 @@ CREATE TABLE reviews (
     updated_at TEXT NOT NULL
 );
 
-CREATE TABLE review_photos (
+CREATE TABLE IF NOT EXISTS review_photos (
     photo_id TEXT PRIMARY KEY,
     review_id TEXT NOT NULL REFERENCES reviews(review_id),
     photo_url TEXT NOT NULL,
@@ -121,7 +121,7 @@ CREATE TABLE review_photos (
     created_at TEXT NOT NULL
 );
 
-CREATE TABLE admin_actions (
+CREATE TABLE IF NOT EXISTS admin_actions (
     action_id TEXT PRIMARY KEY,
     admin_id TEXT NOT NULL REFERENCES users(user_id),
     action_type TEXT NOT NULL,
@@ -131,7 +131,7 @@ CREATE TABLE admin_actions (
     created_at TEXT NOT NULL
 );
 
-CREATE TABLE notifications (
+CREATE TABLE IF NOT EXISTS notifications (
     notification_id TEXT PRIMARY KEY,
     user_id TEXT NOT NULL REFERENCES users(user_id),
     type TEXT NOT NULL,
@@ -150,13 +150,15 @@ INSERT INTO users (user_id, email, phone_number, password_hash, name, profile_pi
 ('user_002', 'sara.mohamed@example.com', '+218910000003', 'user123', 'Sara Mohamed', 'https://picsum.photos/200/200?random=2', 'Travel enthusiast', NULL, NULL, 'guest', TRUE, NULL, '2023-01-20T10:00:00Z', '2023-01-20T10:00:00Z'),
 ('user_003', 'omar.hassan@example.com', '+218910000004', 'host123', 'Omar Hassan', 'https://picsum.photos/200/200?random=3', 'Property owner in Benghazi', 'Khalid Hassan', '+218910000005', 'host', TRUE, 'https://picsum.photos/300/300?random=102', '2023-02-01T10:00:00Z', '2023-02-01T10:00:00Z'),
 ('user_004', 'mariam.essa@example.com', '+218910000006', 'guest123', 'Mariam Essa', 'https://picsum.photos/200/200?random=4', 'Frequent traveler', NULL, NULL, 'guest', TRUE, NULL, '2023-02-05T10:00:00Z', '2023-02-05T10:00:00Z'),
-('user_005', 'admin.ly@example.com', '+218910000007', 'admin123', 'Ly Admin', 'https://picsum.photos/200/200?random=5', 'System Administrator', NULL, NULL, 'admin', TRUE, NULL, '2023-01-01T10:00:00Z', '2023-01-01T10:00:00Z');
+('user_005', 'admin.ly@example.com', '+218910000007', 'admin123', 'Ly Admin', 'https://picsum.photos/200/200?random=5', 'System Administrator', NULL, NULL, 'admin', TRUE, NULL, '2023-01-01T10:00:00Z', '2023-01-01T10:00:00Z')
+ON CONFLICT (user_id) DO NOTHING;
 
 -- Properties
 INSERT INTO properties (property_id, host_id, title, description, city, neighborhood, address, latitude, longitude, property_type, guest_capacity, bedrooms, beds, bathrooms, amenities, base_price_per_night, currency, has_power_backup, has_water_tank, house_rules, cancellation_policy, instant_book, is_active, created_at, updated_at) VALUES
 ('prop_001', 'user_001', 'Luxury Apartment in Tripoli', 'Beautiful modern apartment in the heart of Tripoli with stunning sea views.', 'Tripoli', 'Al-Hadba', '123 Al-Fateh Street', 32.8872, 13.1913, 'apartment', 4, 2, 3, 2, 'WiFi,Air Conditioning,Balcony,Kitchen,Parking', 150, 'LYD', TRUE, TRUE, 'No smoking,No pets', 'moderate', TRUE, TRUE, '2023-01-20T10:00:00Z', '2023-01-20T10:00:00Z'),
 ('prop_002', 'user_001', 'Cozy Studio near Beach', 'Charming studio close to the beach with all modern amenities.', 'Tripoli', 'Al-Mahatta', '45 Beach Road', 32.8761, 13.1867, 'studio', 2, 1, 1, 1, 'WiFi,Air Conditioning,Kitchen,TV', 80, 'LYD', TRUE, FALSE, 'Quiet hours after 10 PM', 'flexible', FALSE, TRUE, '2023-01-25T10:00:00Z', '2023-01-25T10:00:00Z'),
-('prop_003', 'user_003', 'Traditional House in Benghazi', 'Experience traditional Libyan hospitality in this beautiful old town house.', 'Benghazi', 'Al-Wahda', '789 Al-Mujtahid Street', 32.1149, 20.0691, 'house', 6, 3, 4, 2, 'WiFi,Patio,Garden,Kitchen,Washer', 120, 'LYD', FALSE, TRUE, 'Respect for cultural traditions', 'strict', FALSE, TRUE, '2023-02-05T10:00:00Z', '2023-02-05T10:00:00Z');
+('prop_003', 'user_003', 'Traditional House in Benghazi', 'Experience traditional Libyan hospitality in this beautiful old town house.', 'Benghazi', 'Al-Wahda', '789 Al-Mujtahid Street', 32.1149, 20.0691, 'house', 6, 3, 4, 2, 'WiFi,Patio,Garden,Kitchen,Washer', 120, 'LYD', FALSE, TRUE, 'Respect for cultural traditions', 'strict', FALSE, TRUE, '2023-02-05T10:00:00Z', '2023-02-05T10:00:00Z')
+ON CONFLICT (property_id) DO NOTHING;
 
 -- Property Photos
 INSERT INTO property_photos (photo_id, property_id, photo_url, caption, display_order, created_at) VALUES
@@ -166,7 +168,8 @@ INSERT INTO property_photos (photo_id, property_id, photo_url, caption, display_
 ('photo_004', 'prop_002', 'https://picsum.photos/800/600?random=204', 'Studio interior', 1, '2023-01-25T10:00:00Z'),
 ('photo_005', 'prop_002', 'https://picsum.photos/800/600?random=205', 'Bathroom', 2, '2023-01-25T10:00:00Z'),
 ('photo_006', 'prop_003', 'https://picsum.photos/800/600?random=206', 'Traditional courtyard', 1, '2023-02-05T10:00:00Z'),
-('photo_007', 'prop_003', 'https://picsum.photos/800/600?random=207', 'Bedroom with traditional decor', 2, '2023-02-05T10:00:00Z');
+('photo_007', 'prop_003', 'https://picsum.photos/800/600?random=207', 'Bedroom with traditional decor', 2, '2023-02-05T10:00:00Z')
+ON CONFLICT (photo_id) DO NOTHING;
 
 -- Property Availability
 INSERT INTO property_availability (availability_id, property_id, date, is_available, price_override) VALUES
@@ -175,39 +178,47 @@ INSERT INTO property_availability (availability_id, property_id, date, is_availa
 ('avail_003', 'prop_001', '2023-06-03', FALSE, NULL),
 ('avail_004', 'prop_002', '2023-06-01', TRUE, NULL),
 ('avail_005', 'prop_002', '2023-06-02', TRUE, NULL),
-('avail_006', 'prop_003', '2023-06-01', TRUE, NULL);
+('avail_006', 'prop_003', '2023-06-01', TRUE, NULL)
+ON CONFLICT (availability_id) DO NOTHING;
 
 -- Bookings
 INSERT INTO bookings (booking_id, property_id, guest_id, host_id, check_in, check_out, guest_count, total_price, service_fee, special_requests, status, created_at, updated_at) VALUES
 ('book_001', 'prop_001', 'user_002', 'user_001', '2023-06-01', '2023-06-05', 2, 650, 65, 'Late check-in around 10 PM', 'confirmed', '2023-05-01T10:00:00Z', '2023-05-01T10:00:00Z'),
-('book_002', 'prop_003', 'user_004', 'user_003', '2023-06-10', '2023-06-15', 4, 650, 65, 'Celebrating anniversary', 'pending', '2023-05-15T10:00:00Z', '2023-05-15T10:00:00Z');
+('book_002', 'prop_003', 'user_004', 'user_003', '2023-06-10', '2023-06-15', 4, 650, 65, 'Celebrating anniversary', 'pending', '2023-05-15T10:00:00Z', '2023-05-15T10:00:00Z')
+ON CONFLICT (booking_id) DO NOTHING;
 
 -- Conversations
 INSERT INTO conversations (conversation_id, booking_id, guest_id, host_id, created_at, updated_at) VALUES
 ('conv_001', 'book_001', 'user_002', 'user_001', '2023-05-01T10:05:00Z', '2023-05-01T10:05:00Z'),
-('conv_002', 'book_002', 'user_004', 'user_003', '2023-05-15T10:05:00Z', '2023-05-15T10:05:00Z');
+('conv_002', 'book_002', 'user_004', 'user_003', '2023-05-15T10:05:00Z', '2023-05-15T10:05:00Z')
+ON CONFLICT (conversation_id) DO NOTHING;
 
 -- Messages
 INSERT INTO messages (message_id, conversation_id, sender_id, content, is_read, created_at) VALUES
 ('msg_001', 'conv_001', 'user_002', 'Hi Ahmed, I''m excited about our upcoming stay. Could you provide directions to your apartment?', FALSE, '2023-05-01T10:10:00Z'),
 ('msg_002', 'conv_001', 'user_001', 'Hello Sara! I''ll send you detailed directions 24 hours before your arrival.', TRUE, '2023-05-01T11:15:00Z'),
-('msg_003', 'conv_002', 'user_004', 'Hello Omar, we''re looking forward to celebrating our anniversary at your beautiful house.', FALSE, '2023-05-15T10:10:00Z');
+('msg_003', 'conv_002', 'user_004', 'Hello Omar, we''re looking forward to celebrating our anniversary at your beautiful house.', FALSE, '2023-05-15T10:10:00Z')
+ON CONFLICT (message_id) DO NOTHING;
 
 -- Reviews
 INSERT INTO reviews (review_id, booking_id, property_id, reviewer_id, host_id, cleanliness_rating, accuracy_rating, communication_rating, location_rating, check_in_rating, value_rating, overall_rating, comment, created_at, updated_at) VALUES
-('rev_001', 'book_001', 'prop_001', 'user_002', 'user_001', 5, 5, 5, 4, 5, 5, 5, 'Amazing stay! Ahmed was a wonderful host and the apartment was exactly as described.', '2023-06-06T10:00:00Z', '2023-06-06T10:00:00Z');
+('rev_001', 'book_001', 'prop_001', 'user_002', 'user_001', 5, 5, 5, 4, 5, 5, 5, 'Amazing stay! Ahmed was a wonderful host and the apartment was exactly as described.', '2023-06-06T10:00:00Z', '2023-06-06T10:00:00Z')
+ON CONFLICT (review_id) DO NOTHING;
 
 -- Review Photos
 INSERT INTO review_photos (photo_id, review_id, photo_url, caption, created_at) VALUES
-('rphoto_001', 'rev_001', 'https://picsum.photos/800/600?random=301', 'View from the balcony', '2023-06-06T10:00:00Z');
+('rphoto_001', 'rev_001', 'https://picsum.photos/800/600?random=301', 'View from the balcony', '2023-06-06T10:00:00Z')
+ON CONFLICT (photo_id) DO NOTHING;
 
 -- Admin Actions
 INSERT INTO admin_actions (action_id, admin_id, action_type, target_entity_type, target_entity_id, details, created_at) VALUES
 ('act_001', 'user_005', 'property_approved', 'property', 'prop_001', 'Verified property details and photos', '2023-01-20T11:00:00Z'),
-('act_002', 'user_005', 'user_verified', 'user', 'user_001', 'Verified government ID and documents', '2023-01-20T11:30:00Z');
+('act_002', 'user_005', 'user_verified', 'user', 'user_001', 'Verified government ID and documents', '2023-01-20T11:30:00Z')
+ON CONFLICT (action_id) DO NOTHING;
 
 -- Notifications
 INSERT INTO notifications (notification_id, user_id, type, title, message, related_entity_type, related_entity_id, is_read, created_at) VALUES
 ('not_001', 'user_001', 'booking_request', 'New Booking Request', 'You have a new booking request for Luxury Apartment in Tripoli', 'booking', 'book_001', FALSE, '2023-05-01T10:00:00Z'),
 ('not_002', 'user_002', 'booking_confirmed', 'Booking Confirmed', 'Your booking for Luxury Apartment in Tripoli has been confirmed', 'booking', 'book_001', TRUE, '2023-05-01T12:00:00Z'),
-('not_003', 'user_003', 'booking_request', 'New Booking Request', 'You have a new booking request for Traditional House in Benghazi', 'booking', 'book_002', FALSE, '2023-05-15T10:00:00Z');
+('not_003', 'user_003', 'booking_request', 'New Booking Request', 'You have a new booking request for Traditional House in Benghazi', 'booking', 'book_002', FALSE, '2023-05-15T10:00:00Z')
+ON CONFLICT (notification_id) DO NOTHING;
