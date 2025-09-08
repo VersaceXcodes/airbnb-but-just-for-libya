@@ -1,12 +1,12 @@
 {
-  "generated_at": "2024-01-20T10:30:00Z",
+  "generated_at": "2025-09-08T18:55:00Z",
   "user_structure": {
     "table_name": "users",
     "role_field": "role",
     "registration_endpoint": "/api/auth/register",
     "login_endpoint": "/api/auth/login"
   },
-  "total_users": 3,
+  "total_users": 6,
   "verified_users": 3,
   "users": [
     {
@@ -15,7 +15,7 @@
       "role": "host",
       "name": "Ahmed Ali",
       "verified": true,
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8wMDEiLCJlbWFpbCI6ImFobWVkLmFsaUBleGFtcGxlLmNvbSIsImlhdCI6MTc1NjkyMTM5MiwiZXhwIjoxNzU3NTI2MTkyfQ.kguxm01aCrMAzoFK5uiGcttQeyik0g0I9vIM_R-1N3s"
+      "note": "Original test user"
     },
     {
       "email": "sara.mohamed@example.com",
@@ -23,7 +23,7 @@
       "role": "guest",
       "name": "Sara Mohamed",
       "verified": true,
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8wMDIiLCJlbWFpbCI6InNhcmEubW9oYW1lZEBleGFtcGxlLmNvbSIsImlhdCI6MTc1NjkyMTM5MywiZXhwIjoxNzU3NTI2MTkzfQ.w48DxHWQnRqg1V4h0is9EYXFe1qXjtNRSTchO6AqNAk"
+      "note": "Original test user"
     },
     {
       "email": "admin.ly@example.com",
@@ -31,7 +31,31 @@
       "role": "admin",
       "name": "Ly Admin",
       "verified": true,
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8wMDUiLCJlbWFpbCI6ImFkbWluLmx5QGV4YW1wbGUuY29tIiwiaWF0IjoxNzU2OTIxMzk4LCJleHAiOjE3NTc1MjYxOTh9.fOCoEk5x7MZbhrIIN_-ZQ3fnxxOOpg9pjRPhsXSqCLo"
+      "note": "Original test user"
+    },
+    {
+      "email": "versacecodes@gmail.com",
+      "password": "password123",
+      "role": "guest",
+      "name": "Guest User",
+      "verified": false,
+      "note": "Added for browser testing - Guest User"
+    },
+    {
+      "email": "sarah.thompson@email.com",
+      "password": "password123",
+      "role": "host",
+      "name": "Sarah Thompson",
+      "verified": false,
+      "note": "Added for browser testing - Host User"
+    },
+    {
+      "email": "mike.rodriguez@beachhost.com",
+      "password": "password123",
+      "role": "host",
+      "name": "Mike Rodriguez",
+      "verified": false,
+      "note": "Added for browser testing - Super Host User"
     }
   ],
   "by_role": {
@@ -40,6 +64,16 @@
         "email": "ahmed.ali@example.com",
         "password": "password123",
         "verified": true
+      },
+      {
+        "email": "sarah.thompson@email.com",
+        "password": "password123",
+        "verified": false
+      },
+      {
+        "email": "mike.rodriguez@beachhost.com",
+        "password": "password123",
+        "verified": false
       }
     ],
     "guest": [
@@ -47,6 +81,11 @@
         "email": "sara.mohamed@example.com",
         "password": "user123",
         "verified": true
+      },
+      {
+        "email": "versacecodes@gmail.com",
+        "password": "password123",
+        "verified": false
       }
     ],
     "admin": [

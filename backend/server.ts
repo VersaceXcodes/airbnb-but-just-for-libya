@@ -74,13 +74,6 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-    methods: ['GET', 'POST'],
-    credentials: true
-  }
-});
 
 const port = parseInt(process.env.PORT || '3000');
 
@@ -138,9 +131,35 @@ function createErrorResponse(
   return response;
 }
 
+// CORS configuration
+const allowedOrigins = [
+  process.env.FRONTEND_URL || 'https://123airbnb-but-just-for-libya.launchpulse.ai',
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://123airbnb-but-just-for-libya.launchpulse.ai'
+];
+
+const io = new Server(server, {
+  cors: {
+    origin: allowedOrigins,
+    methods: ['GET', 'POST'],
+    credentials: true
+  }
+});
+
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.log('CORS blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
 app.use(express.json({ limit: "5mb" }));

@@ -3,143 +3,23 @@
 > tsx server.ts
 
 Server running on port 3000 and listening on 0.0.0.0
-127.0.0.1 - - [03/Sep/2025:15:09:22 +0000] "GET /api/health HTTP/1.1" 200 54 "-" "curl/7.88.1"
-127.0.0.1 - - [03/Sep/2025:15:09:26 +0000] "GET /api/auth/verify HTTP/1.1" 200 145 "-" "curl/7.88.1"
-Registration error: ZodError: [
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "password_hash"
-    ],
-    "message": "Required"
-  }
-]
-    at get error [as error] (file:///app/backend/node_modules/zod/v3/types.js:39:31)
-    at ZodObject.parse (file:///app/backend/node_modules/zod/v3/types.js:114:22)
-    at <anonymous> (/app/backend/server.ts:204:49)
-    at Layer.handle [as handle_request] (/app/backend/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/backend/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/backend/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/backend/node_modules/express/lib/router/layer.js:95:5)
-    at /app/backend/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/backend/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/backend/node_modules/express/lib/router/index.js:280:10) {
-  issues: [
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    }
-  ],
-  addIssue: [Function (anonymous)],
-  addIssues: [Function (anonymous)],
-  errors: [
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    }
-  ]
-}
-127.0.0.1 - - [03/Sep/2025:15:09:28 +0000] "POST /api/auth/register HTTP/1.1" 400 130 "-" "curl/7.88.1"
-Registration error: ZodError: [
-  {
-    "code": "invalid_type",
-    "expected": "string",
-    "received": "undefined",
-    "path": [
-      "password_hash"
-    ],
-    "message": "Required"
-  }
-]
-    at get error [as error] (file:///app/backend/node_modules/zod/v3/types.js:39:31)
-    at ZodObject.parse (file:///app/backend/node_modules/zod/v3/types.js:114:22)
-    at <anonymous> (/app/backend/server.ts:204:49)
-    at Layer.handle [as handle_request] (/app/backend/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/backend/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/backend/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/backend/node_modules/express/lib/router/layer.js:95:5)
-    at /app/backend/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/backend/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/backend/node_modules/express/lib/router/index.js:280:10) {
-  issues: [
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    }
-  ],
-  addIssue: [Function (anonymous)],
-  addIssues: [Function (anonymous)],
-  errors: [
-    {
-      code: 'invalid_type',
-      expected: 'string',
-      received: 'undefined',
-      path: [Array],
-      message: 'Required'
-    }
-  ]
-}
-127.0.0.1 - - [03/Sep/2025:15:09:32 +0000] "POST /api/auth/register HTTP/1.1" 400 130 "-" "curl/7.88.1"
-Registration error: ZodError: [
-  {
-    "code": "too_small",
-    "minimum": 8,
-    "type": "string",
-    "inclusive": true,
-    "exact": false,
-    "message": "String must contain at least 8 character(s)",
-    "path": [
-      "password_hash"
-    ]
-  }
-]
-    at get error [as error] (file:///app/backend/node_modules/zod/v3/types.js:39:31)
-    at ZodObject.parse (file:///app/backend/node_modules/zod/v3/types.js:114:22)
-    at <anonymous> (/app/backend/server.ts:204:49)
-    at Layer.handle [as handle_request] (/app/backend/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/backend/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/backend/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/backend/node_modules/express/lib/router/layer.js:95:5)
-    at /app/backend/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/backend/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/backend/node_modules/express/lib/router/index.js:280:10) {
-  issues: [
-    {
-      code: 'too_small',
-      minimum: 8,
-      type: 'string',
-      inclusive: true,
-      exact: false,
-      message: 'String must contain at least 8 character(s)',
-      path: [Array]
-    }
-  ],
-  addIssue: [Function (anonymous)],
-  addIssues: [Function (anonymous)],
-  errors: [
-    {
-      code: 'too_small',
-      minimum: 8,
-      type: 'string',
-      inclusive: true,
-      exact: false,
-      message: 'String must contain at least 8 character(s)',
-      path: [Array]
-    }
-  ]
-}
-127.0.0.1 - - [03/Sep/2025:15:09:36 +0000] "POST /api/auth/register HTTP/1.1" 400 130 "-" "curl/7.88.1"
-127.0.0.1 - - [03/Sep/2025:15:09:43 +0000] "POST /api/auth/register HTTP/1.1" 201 602 "-" "curl/7.88.1"
-127.0.0.1 - - [03/Sep/2025:15:09:47 +0000] "POST /api/auth/register HTTP/1.1" 201 606 "-" "curl/7.88.1"
-127.0.0.1 - - [03/Sep/2025:15:09:52 +0000] "POST /api/conversations HTTP/1.1" 200 30 "-" "curl/7.88.1"
+127.0.0.1 - - [08/Sep/2025:18:57:45 +0000] "GET /api/health HTTP/1.1" 200 54 "-" "curl/7.88.1"
+127.0.0.1 - - [08/Sep/2025:18:57:50 +0000] "POST /api/auth/login HTTP/1.1" 200 615 "-" "curl/7.88.1"
+127.0.0.1 - - [08/Sep/2025:18:58:16 +0000] "GET /api/reviews?limit=3&sort_by=created_at HTTP/1.1" 404 150 "https://123airbnb-but-just-for-libya.launchpulse.ai/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+127.0.0.1 - - [08/Sep/2025:18:58:16 +0000] "GET /api/properties?limit=6&sort_by=created_at HTTP/1.1" 304 - "https://123airbnb-but-just-for-libya.launchpulse.ai/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+127.0.0.1 - - [08/Sep/2025:18:58:17 +0000] "GET /api/reviews?limit=3&sort_by=created_at HTTP/1.1" 404 150 "https://123airbnb-but-just-for-libya.launchpulse.ai/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+127.0.0.1 - - [08/Sep/2025:18:58:31 +0000] "GET /api/reviews?limit=3&sort_by=created_at HTTP/1.1" 404 150 "https://123airbnb-but-just-for-libya.launchpulse.ai/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+127.0.0.1 - - [08/Sep/2025:18:58:32 +0000] "GET /api/reviews?limit=3&sort_by=created_at HTTP/1.1" 404 150 "https://123airbnb-but-just-for-libya.launchpulse.ai/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+127.0.0.1 - - [08/Sep/2025:18:58:47 +0000] "GET /api/reviews?limit=3&sort_by=created_at HTTP/1.1" 404 150 "https://123airbnb-but-just-for-libya.launchpulse.ai/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+127.0.0.1 - - [08/Sep/2025:18:58:49 +0000] "GET /api/reviews?limit=3&sort_by=created_at HTTP/1.1" 404 150 "https://123airbnb-but-just-for-libya.launchpulse.ai/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+127.0.0.1 - - [08/Sep/2025:18:58:56 +0000] "POST /api/auth/login HTTP/1.1" 200 615 "-" "curl/7.88.1"
+127.0.0.1 - - [08/Sep/2025:18:58:56 +0000] "POST /api/auth/login HTTP/1.1" 200 623 "-" "curl/7.88.1"
+127.0.0.1 - - [08/Sep/2025:18:58:56 +0000] "POST /api/auth/login HTTP/1.1" 200 632 "-" "curl/7.88.1"
+127.0.0.1 - - [08/Sep/2025:18:58:56 +0000] "POST /api/auth/login HTTP/1.1" 400 129 "-" "curl/7.88.1"
+127.0.0.1 - - [08/Sep/2025:18:59:02 +0000] "POST /api/auth/login HTTP/1.1" 200 615 "-" "curl/7.88.1"
+127.0.0.1 - - [08/Sep/2025:18:59:02 +0000] "POST /api/auth/login HTTP/1.1" 200 623 "-" "curl/7.88.1"
+127.0.0.1 - - [08/Sep/2025:18:59:02 +0000] "POST /api/auth/login HTTP/1.1" 200 632 "-" "curl/7.88.1"
+127.0.0.1 - - [08/Sep/2025:18:59:07 +0000] "POST /api/auth/login HTTP/1.1" 400 129 "-" "curl/7.88.1"
+127.0.0.1 - - [08/Sep/2025:18:59:12 +0000] "POST /api/auth/login HTTP/1.1" 200 615 "-" "curl/7.88.1"
+127.0.0.1 - - [08/Sep/2025:18:59:17 +0000] "POST /api/auth/login HTTP/1.1" 200 615 "-" "curl/7.88.1"
+127.0.0.1 - - [08/Sep/2025:18:59:17 +0000] "GET /api/auth/verify HTTP/1.1" 200 170 "-" "curl/7.88.1"

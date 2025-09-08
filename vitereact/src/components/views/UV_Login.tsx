@@ -35,7 +35,17 @@ const UV_Login: React.FC = () => {
       setErrors({ email: '', password: '', general: '' });
       clearAuthError();
     }
-  }, [email, password, errors, clearAuthError]);
+  }, [email, password, clearAuthError]);
+
+  // Update general error when store error changes
+  useEffect(() => {
+    if (errorMessage && !errors.general) {
+      setErrors(prev => ({
+        ...prev,
+        general: errorMessage
+      }));
+    }
+  }, [errorMessage, errors.general]);
 
   const validateForm = (): boolean => {
     let isValid = true;
@@ -68,13 +78,17 @@ const UV_Login: React.FC = () => {
     
     try {
       await loginUser(email, password);
-      navigate('/dashboard');
+      // Only navigate if login was successful and user is authenticated
+      if (isAuthenticated) {
+        navigate('/dashboard');
+      }
     } catch (err: any) {
       // Error is handled in store, but we'll set general error here
       console.error('Login error:', err);
+      const errorMsg = errorMessage || err.message || 'An error occurred during login';
       setErrors(prev => ({
         ...prev,
-        general: errorMessage || 'An error occurred during login'
+        general: errorMsg
       }));
     }
   };
