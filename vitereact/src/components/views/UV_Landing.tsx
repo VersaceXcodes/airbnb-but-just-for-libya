@@ -137,7 +137,7 @@ const UV_Landing: React.FC = () => {
           <div className="text-center">
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
               <span className="block"> Libyan Stays, </span>
-              <span className="block text-green-300"> Local Experiences </span>
+              <span className="block text-green-300"> Luxury Experiences </span>
             </h1>
             <p className="mt-6 max-w-lg mx-auto text-xl text-gray-200">
               Discover unique accommodations across Libya with LibyaStay - your home away from home.
