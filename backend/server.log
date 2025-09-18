@@ -1,25 +1,19 @@
 
-> backend@1.0.0 dev
-> tsx server.ts
+> backend@1.0.0 start
+> nodemon --exec "tsx" server.ts
 
+[33m[nodemon] 3.1.10[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: ts,json[39m
+[32m[nodemon] starting `tsx server.ts`[39m
 Server running on port 3000 and listening on 0.0.0.0
-127.0.0.1 - - [08/Sep/2025:18:57:45 +0000] "GET /api/health HTTP/1.1" 200 54 "-" "curl/7.88.1"
-127.0.0.1 - - [08/Sep/2025:18:57:50 +0000] "POST /api/auth/login HTTP/1.1" 200 615 "-" "curl/7.88.1"
-127.0.0.1 - - [08/Sep/2025:18:58:16 +0000] "GET /api/reviews?limit=3&sort_by=created_at HTTP/1.1" 404 150 "https://123airbnb-but-just-for-libya.launchpulse.ai/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-127.0.0.1 - - [08/Sep/2025:18:58:16 +0000] "GET /api/properties?limit=6&sort_by=created_at HTTP/1.1" 304 - "https://123airbnb-but-just-for-libya.launchpulse.ai/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-127.0.0.1 - - [08/Sep/2025:18:58:17 +0000] "GET /api/reviews?limit=3&sort_by=created_at HTTP/1.1" 404 150 "https://123airbnb-but-just-for-libya.launchpulse.ai/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-127.0.0.1 - - [08/Sep/2025:18:58:31 +0000] "GET /api/reviews?limit=3&sort_by=created_at HTTP/1.1" 404 150 "https://123airbnb-but-just-for-libya.launchpulse.ai/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-127.0.0.1 - - [08/Sep/2025:18:58:32 +0000] "GET /api/reviews?limit=3&sort_by=created_at HTTP/1.1" 404 150 "https://123airbnb-but-just-for-libya.launchpulse.ai/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-127.0.0.1 - - [08/Sep/2025:18:58:47 +0000] "GET /api/reviews?limit=3&sort_by=created_at HTTP/1.1" 404 150 "https://123airbnb-but-just-for-libya.launchpulse.ai/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-127.0.0.1 - - [08/Sep/2025:18:58:49 +0000] "GET /api/reviews?limit=3&sort_by=created_at HTTP/1.1" 404 150 "https://123airbnb-but-just-for-libya.launchpulse.ai/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-127.0.0.1 - - [08/Sep/2025:18:58:56 +0000] "POST /api/auth/login HTTP/1.1" 200 615 "-" "curl/7.88.1"
-127.0.0.1 - - [08/Sep/2025:18:58:56 +0000] "POST /api/auth/login HTTP/1.1" 200 623 "-" "curl/7.88.1"
-127.0.0.1 - - [08/Sep/2025:18:58:56 +0000] "POST /api/auth/login HTTP/1.1" 200 632 "-" "curl/7.88.1"
-127.0.0.1 - - [08/Sep/2025:18:58:56 +0000] "POST /api/auth/login HTTP/1.1" 400 129 "-" "curl/7.88.1"
-127.0.0.1 - - [08/Sep/2025:18:59:02 +0000] "POST /api/auth/login HTTP/1.1" 200 615 "-" "curl/7.88.1"
-127.0.0.1 - - [08/Sep/2025:18:59:02 +0000] "POST /api/auth/login HTTP/1.1" 200 623 "-" "curl/7.88.1"
-127.0.0.1 - - [08/Sep/2025:18:59:02 +0000] "POST /api/auth/login HTTP/1.1" 200 632 "-" "curl/7.88.1"
-127.0.0.1 - - [08/Sep/2025:18:59:07 +0000] "POST /api/auth/login HTTP/1.1" 400 129 "-" "curl/7.88.1"
-127.0.0.1 - - [08/Sep/2025:18:59:12 +0000] "POST /api/auth/login HTTP/1.1" 200 615 "-" "curl/7.88.1"
-127.0.0.1 - - [08/Sep/2025:18:59:17 +0000] "POST /api/auth/login HTTP/1.1" 200 615 "-" "curl/7.88.1"
-127.0.0.1 - - [08/Sep/2025:18:59:17 +0000] "GET /api/auth/verify HTTP/1.1" 200 170 "-" "curl/7.88.1"
+127.0.0.1 - - [18/Sep/2025:14:45:17 +0000] "GET /api/health HTTP/1.1" 200 54 "-" "curl/7.88.1"
+127.0.0.1 - - [18/Sep/2025:14:45:23 +0000] "POST /api/bookings HTTP/1.1" 201 394 "-" "curl/7.88.1"
+127.0.0.1 - - [18/Sep/2025:14:46:09 +0000] "POST /api/properties HTTP/1.1" 201 644 "-" "curl/7.88.1"
+127.0.0.1 - - [18/Sep/2025:14:46:17 +0000] "GET /api/conversations HTTP/1.1" 200 233 "-" "curl/7.88.1"
+127.0.0.1 - - [18/Sep/2025:14:46:24 +0000] "GET /api/notifications HTTP/1.1" 200 2 "-" "curl/7.88.1"
+127.0.0.1 - - [18/Sep/2025:14:46:30 +0000] "PATCH /api/bookings/book_Sx3f-vWC_zJdFH9jNkmfw HTTP/1.1" 200 396 "-" "curl/7.88.1"
+127.0.0.1 - - [18/Sep/2025:14:46:38 +0000] "POST /api/bookings/book_Sx3f-vWC_zJdFH9jNkmfw/reviews HTTP/1.1" 201 457 "-" "curl/7.88.1"
+127.0.0.1 - - [18/Sep/2025:14:47:41 +0000] "GET /api/properties?location=Tripoli&limit=2 HTTP/1.1" 200 1352 "-" "curl/7.88.1"
+127.0.0.1 - - [18/Sep/2025:14:48:11 +0000] "GET / HTTP/1.1" 200 827 "-" "curl/7.88.1"

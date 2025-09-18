@@ -525,7 +525,7 @@ export const useAppStore = create<AppState>()(
         
         const socket = io(import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000', {
           auth: {
-            token: `Bearer ${token}`,
+            token: token,
           },
         });
         

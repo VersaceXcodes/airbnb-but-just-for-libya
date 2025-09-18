@@ -269,8 +269,7 @@ export const bookingSchema = z.object({
 
 export const createBookingInputSchema = z.object({
   property_id: z.string().min(1),
-  guest_id: z.string().min(1),
-  host_id: z.string().min(1),
+  guest_id: z.string().min(1).optional(), // Will be set by server
   check_in: z.coerce.date(),
   check_out: z.coerce.date(),
   guest_count: z.number().int().positive(),

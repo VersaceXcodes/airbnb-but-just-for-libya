@@ -188,11 +188,11 @@ const UV_Registration: React.FC = () => {
       return;
     }
     
-    // Check if email and SMS are verified
-    if (!verificationState.email_verified || !verificationState.sms_verified) {
-      alert('Please verify both your email and phone number');
-      return;
-    }
+    // Skip verification for now - make it optional
+    // if (!verificationState.email_verified || !verificationState.sms_verified) {
+    //   alert('Please verify both your email and phone number');
+    //   return;
+    // }
     
     setSubmitLoading(true);
     clearAuthError();

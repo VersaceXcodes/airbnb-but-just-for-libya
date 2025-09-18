@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useAppStore } from '@/store/main';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 // Global views
 import GV_TopNav from '@/components/views/GV_TopNav.tsx';
@@ -24,6 +25,7 @@ import UV_CreateReview from '@/components/views/UV_CreateReview.tsx';
 import UV_AdminPanel from '@/components/views/UV_AdminPanel.tsx';
 import UV_ProfileSettings from '@/components/views/UV_ProfileSettings.tsx';
 import UV_PasswordReset from '@/components/views/UV_PasswordReset.tsx';
+import UV_NotFound from '@/components/views/UV_NotFound.tsx';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -72,10 +74,11 @@ const App: React.FC = () => {
   return (
     <Router>
       <QueryClientProvider client={queryClient}>
-        <div className="App min-h-screen flex flex-col">
-          <GV_TopNav />
-          <main className="flex-1">
-            <Routes>
+        <ErrorBoundary>
+          <div className="App min-h-screen flex flex-col">
+            <GV_TopNav />
+            <main className="flex-1">
+              <Routes>
               {/* Public Routes */}
               <Route path="/" element={<UV_Landing />} />
               <Route path="/search" element={<UV_SearchResults />} />
@@ -166,12 +169,13 @@ const App: React.FC = () => {
                 } 
               />
               
-              {/* Catch all - redirect to home */}
-              <Route path="*" element={<Navigate to="/" replace />} />
+              {/* Catch all - show 404 page */}
+              <Route path="*" element={<UV_NotFound />} />
             </Routes>
           </main>
           <GV_Footer />
         </div>
+        </ErrorBoundary>
       </QueryClientProvider>
     </Router>
   );
