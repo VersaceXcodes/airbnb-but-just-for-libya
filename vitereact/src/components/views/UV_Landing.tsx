@@ -130,92 +130,130 @@ const UV_Landing: React.FC = () => {
 
   return (
     <>
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-green-700 to-red-700 text-white">
-        <div className="absolute inset-0 bg-black opacity-30"></div>
-        <div className="relative max-w-7xl mx-auto px-4 py-24 sm:py-32 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-              <span className="block"> Libyan Stays, </span>
-              <span className="block text-green-300"> Luxury Experiences </span>
+      {/* Hero Section - Zillow Style */}
+      <div className="relative min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
+        {/* Background Image Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent"></div>
+        
+        {/* Hero Content */}
+        <div className="relative max-w-7xl mx-auto px-4 pt-20 pb-32 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
+              The #1 site for
+              <br />
+              <span className="text-blue-600">Libya real estate</span>
             </h1>
-            <p className="mt-6 max-w-lg mx-auto text-xl text-gray-200">
-              Discover unique accommodations across Libya with LibyaStay - your home away from home.
+            <p className="mt-6 text-xl text-gray-600 max-w-2xl">
+              Search the most complete source of homes, photos and school data on the market.
             </p>
           </div>
 
-          {/* Search Bar Widget */}
-          <div className="mt-10 max-w-4xl mx-auto">
-            <div className="bg-white rounded-lg shadow-xl p-6">
-              <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="md:col-span-2">
-                  <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
-                    Where to?
-                  </label>
-                  <input
-                    type="text"
-                    id="location"
-                    placeholder="Tripoli, Benghazi, Misrata..."
-                    value={searchFormValues.location}
-                    onChange={(e) => handleSearchChange('location', e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="check_in" className="block text-sm font-medium text-gray-700 mb-1">
-                    Check-in
-                  </label>
-                  <input
-                    type="date"
-                    id="check_in"
-                    value={searchFormValues.check_in}
-                    onChange={(e) => handleSearchChange('check_in', e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="check_out" className="block text-sm font-medium text-gray-700 mb-1">
-                    Check-out
-                  </label>
-                  <input
-                    type="date"
-                    id="check_out"
-                    value={searchFormValues.check_out}
-                    onChange={(e) => handleSearchChange('check_out', e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="guests" className="block text-sm font-medium text-gray-700 mb-1">
-                    Guests
-                  </label>
-                  <select
-                    id="guests"
-                    value={searchFormValues.guest_count}
-                    onChange={(e) => handleSearchChange('guest_count', parseInt(e.target.value))}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                  >
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map(num => (
-                      <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
-                    ))}
-                  </select>
-                </div>
-                
-                <div className="md:col-span-4">
-                  <button
-                    type="submit"
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-md transition duration-300"
-                  >
-                    Search Accommodations
-                  </button>
-                </div>
-              </form>
+          {/* Search Tabs */}
+          <div className="mt-12 max-w-4xl">
+            <div className="bg-white rounded-t-lg shadow-lg">
+              <div className="flex border-b border-gray-200">
+                <button className="px-6 py-4 text-sm font-semibold text-blue-600 border-b-2 border-blue-600 bg-white">
+                  Rent
+                </button>
+                <button className="px-6 py-4 text-sm font-semibold text-gray-500 hover:text-gray-700 bg-gray-50">
+                  Buy
+                </button>
+                <button className="px-6 py-4 text-sm font-semibold text-gray-500 hover:text-gray-700 bg-gray-50">
+                  Sell
+                </button>
+              </div>
+              
+              {/* Enhanced Search Form */}
+              <div className="p-6">
+                <form onSubmit={handleSearchSubmit} className="space-y-4">
+                  {/* Main Search Bar */}
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 12.414a6 6 0 111.414-1.414l4.243 4.243a1 1 0 01-1.414 1.414z" />
+                      </svg>
+                    </div>
+                    <input
+                      type="text"
+                      id="location"
+                      placeholder="Enter an address, neighborhood, city, or ZIP code"
+                      value={searchFormValues.location}
+                      onChange={(e) => handleSearchChange('location', e.target.value)}
+                      className="w-full pl-12 pr-4 py-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-500"
+                      required
+                    />
+                  </div>
+                  
+                  {/* Filters Row */}
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div className="relative">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Check-in</label>
+                      <input
+                        type="date"
+                        id="check_in"
+                        value={searchFormValues.check_in}
+                        onChange={(e) => handleSearchChange('check_in', e.target.value)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                        required
+                      />
+                    </div>
+                    
+                    <div className="relative">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Check-out</label>
+                      <input
+                        type="date"
+                        id="check_out"
+                        value={searchFormValues.check_out}
+                        onChange={(e) => handleSearchChange('check_out', e.target.value)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                        required
+                      />
+                    </div>
+                    
+                    <div className="relative">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Guests</label>
+                      <select
+                        id="guests"
+                        value={searchFormValues.guest_count}
+                        onChange={(e) => handleSearchChange('guest_count', parseInt(e.target.value))}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                      >
+                        {[1, 2, 3, 4, 5, 6, 7, 8].map(num => (
+                          <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
+                        ))}
+                      </select>
+                    </div>
+                    
+                    <div className="flex items-end">
+                      <button
+                        type="submit"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 flex items-center justify-center"
+                      >
+                        <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        Search
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-gray-900">500+</div>
+              <div className="text-sm text-gray-600 mt-1">Properties Listed</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-gray-900">50+</div>
+              <div className="text-sm text-gray-600 mt-1">Cities Covered</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-gray-900">1000+</div>
+              <div className="text-sm text-gray-600 mt-1">Happy Guests</div>
             </div>
           </div>
         </div>
