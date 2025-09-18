@@ -130,130 +130,160 @@ const UV_Landing: React.FC = () => {
 
   return (
     <>
-      {/* Hero Section - Zillow Style */}
-      <div className="relative min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
-        {/* Background Image Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent"></div>
+      {/* Modern Hero Section */}
+      <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+          <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+        </div>
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/50 via-transparent to-slate-900/50"></div>
         
         {/* Hero Content */}
-        <div className="relative max-w-7xl mx-auto px-4 pt-20 pb-32 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-              The #1 site for
-              <br />
-              <span className="text-blue-600">Libya real estate</span>
+        <div className="relative max-w-7xl mx-auto px-4 pt-32 pb-32 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="mb-8">
+              <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white backdrop-blur-sm border border-white/20">
+                <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                Trusted by 1000+ travelers
+              </span>
+            </div>
+            
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-8">
+              Discover
+              <span className="block bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent">
+                Libya's Hidden Gems
+              </span>
             </h1>
-            <p className="mt-6 text-xl text-gray-600 max-w-2xl">
-              Search the most complete source of homes, photos and school data on the market.
+            
+            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
+              Experience authentic Libyan hospitality with our curated collection of unique accommodations across the country's most beautiful destinations.
             </p>
           </div>
 
-          {/* Search Tabs */}
-          <div className="mt-12 max-w-4xl">
-            <div className="bg-white rounded-t-lg shadow-lg">
-              <div className="flex border-b border-gray-200">
-                <button className="px-6 py-4 text-sm font-semibold text-blue-600 border-b-2 border-blue-600 bg-white">
+          {/* Modern Search Card */}
+          <div className="max-w-5xl mx-auto mt-16">
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 shadow-2xl p-8">
+              <div className="flex flex-wrap justify-center gap-4 mb-8">
+                <button className="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  <svg className="w-4 h-4 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
                   Rent
                 </button>
-                <button className="px-6 py-4 text-sm font-semibold text-gray-500 hover:text-gray-700 bg-gray-50">
+                <button className="px-6 py-3 text-sm font-semibold text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300">
+                  <svg className="w-4 h-4 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                  </svg>
                   Buy
                 </button>
-                <button className="px-6 py-4 text-sm font-semibold text-gray-500 hover:text-gray-700 bg-gray-50">
+                <button className="px-6 py-3 text-sm font-semibold text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300">
+                  <svg className="w-4 h-4 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
                   Sell
                 </button>
               </div>
               
-              {/* Enhanced Search Form */}
-              <div className="p-6">
-                <form onSubmit={handleSearchSubmit} className="space-y-4">
-                  {/* Main Search Bar */}
+              <form onSubmit={handleSearchSubmit} className="space-y-6">
+                {/* Main Search Bar */}
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+                    <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 12.414a6 6 0 111.414-1.414l4.243 4.243a1 1 0 01-1.414 1.414z" />
+                    </svg>
+                  </div>
+                  <input
+                    type="text"
+                    id="location"
+                    placeholder="Where do you want to stay? (City, neighborhood, or landmark)"
+                    value={searchFormValues.location}
+                    onChange={(e) => handleSearchChange('location', e.target.value)}
+                    className="w-full pl-16 pr-6 py-5 text-lg bg-white/90 backdrop-blur-sm border border-white/30 rounded-2xl focus:ring-4 focus:ring-purple-500/30 focus:border-purple-400 text-gray-900 placeholder-gray-500 shadow-lg transition-all duration-300"
+                    required
+                  />
+                </div>
+                
+                {/* Filters Row */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                      <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 12.414a6 6 0 111.414-1.414l4.243 4.243a1 1 0 01-1.414 1.414z" />
-                      </svg>
-                    </div>
+                    <label className="block text-sm font-medium text-white/90 mb-2">Check-in</label>
                     <input
-                      type="text"
-                      id="location"
-                      placeholder="Enter an address, neighborhood, city, or ZIP code"
-                      value={searchFormValues.location}
-                      onChange={(e) => handleSearchChange('location', e.target.value)}
-                      className="w-full pl-12 pr-4 py-4 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-500"
+                      type="date"
+                      id="check_in"
+                      value={searchFormValues.check_in}
+                      onChange={(e) => handleSearchChange('check_in', e.target.value)}
+                      className="w-full px-4 py-4 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl focus:ring-4 focus:ring-purple-500/30 focus:border-purple-400 text-gray-900 shadow-lg transition-all duration-300"
                       required
                     />
                   </div>
                   
-                  {/* Filters Row */}
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div className="relative">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Check-in</label>
-                      <input
-                        type="date"
-                        id="check_in"
-                        value={searchFormValues.check_in}
-                        onChange={(e) => handleSearchChange('check_in', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                        required
-                      />
-                    </div>
-                    
-                    <div className="relative">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Check-out</label>
-                      <input
-                        type="date"
-                        id="check_out"
-                        value={searchFormValues.check_out}
-                        onChange={(e) => handleSearchChange('check_out', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                        required
-                      />
-                    </div>
-                    
-                    <div className="relative">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Guests</label>
-                      <select
-                        id="guests"
-                        value={searchFormValues.guest_count}
-                        onChange={(e) => handleSearchChange('guest_count', parseInt(e.target.value))}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
-                      >
-                        {[1, 2, 3, 4, 5, 6, 7, 8].map(num => (
-                          <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
-                        ))}
-                      </select>
-                    </div>
-                    
-                    <div className="flex items-end">
-                      <button
-                        type="submit"
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 flex items-center justify-center"
-                      >
-                        <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        Search
-                      </button>
-                    </div>
+                  <div className="relative">
+                    <label className="block text-sm font-medium text-white/90 mb-2">Check-out</label>
+                    <input
+                      type="date"
+                      id="check_out"
+                      value={searchFormValues.check_out}
+                      onChange={(e) => handleSearchChange('check_out', e.target.value)}
+                      className="w-full px-4 py-4 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl focus:ring-4 focus:ring-purple-500/30 focus:border-purple-400 text-gray-900 shadow-lg transition-all duration-300"
+                      required
+                    />
                   </div>
-                </form>
-              </div>
+                  
+                  <div className="relative">
+                    <label className="block text-sm font-medium text-white/90 mb-2">Guests</label>
+                    <select
+                      id="guests"
+                      value={searchFormValues.guest_count}
+                      onChange={(e) => handleSearchChange('guest_count', parseInt(e.target.value))}
+                      className="w-full px-4 py-4 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl focus:ring-4 focus:ring-purple-500/30 focus:border-purple-400 text-gray-900 shadow-lg transition-all duration-300"
+                    >
+                      {[1, 2, 3, 4, 5, 6, 7, 8].map(num => (
+                        <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
+                      ))}
+                    </select>
+                  </div>
+                  
+                  <div className="flex items-end">
+                    <button
+                      type="submit"
+                      className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:scale-105"
+                    >
+                      <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                      Search
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
 
-          {/* Quick Stats */}
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">500+</div>
-              <div className="text-sm text-gray-600 mt-1">Properties Listed</div>
+          {/* Modern Stats */}
+          <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="text-center group">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+                <div className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">500+</div>
+                <div className="text-white/80 font-medium">Properties Listed</div>
+              </div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">50+</div>
-              <div className="text-sm text-gray-600 mt-1">Cities Covered</div>
+            <div className="text-center group">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+                <div className="text-4xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent mb-2">50+</div>
+                <div className="text-white/80 font-medium">Cities Covered</div>
+              </div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">1000+</div>
-              <div className="text-sm text-gray-600 mt-1">Happy Guests</div>
+            <div className="text-center group">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+                <div className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent mb-2">1000+</div>
+                <div className="text-white/80 font-medium">Happy Guests</div>
+              </div>
             </div>
           </div>
         </div>
