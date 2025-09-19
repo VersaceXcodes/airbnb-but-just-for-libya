@@ -130,73 +130,136 @@ const UV_Landing: React.FC = () => {
 
   return (
     <>
-      {/* Modern Hero Section */}
-      <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
-        {/* Animated Background Elements */}
+      {/* Ultra-Modern Hero Section */}
+      <div className="relative min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950 overflow-hidden">
+        {/* Enhanced Animated Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-          <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+          <div className="absolute top-10 -left-10 w-96 h-96 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+          <div className="absolute top-20 -right-10 w-80 h-80 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-bounce"></div>
+          <div className="absolute -bottom-20 left-1/4 w-72 h-72 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full mix-blend-multiply filter blur-3xl opacity-35 animate-pulse"></div>
+          <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-gradient-to-r from-orange-400 to-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-25 animate-bounce"></div>
         </div>
         
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/50 via-transparent to-slate-900/50"></div>
+        {/* Mesh Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-indigo-950/60 to-slate-950/90"></div>
+        
+        {/* Geometric Pattern Overlay */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}></div>
+        </div>
         
         {/* Hero Content */}
-        <div className="relative max-w-7xl mx-auto px-4 pt-32 pb-32 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="mb-8">
-              <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white backdrop-blur-sm border border-white/20">
-                <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+        <div className="relative max-w-7xl mx-auto px-4 pt-24 pb-32 sm:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Enhanced Badge */}
+            <div className="mb-12 animate-fade-in-up">
+              <span className="group inline-flex items-center px-6 py-3 rounded-full text-sm font-semibold bg-gradient-to-r from-white/10 to-white/5 text-white backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-cyan-500/25 transition-all duration-500 hover:scale-105">
+                <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mr-3 animate-pulse"></div>
+                <svg className="w-4 h-4 mr-2 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
-                Trusted by 1000+ travelers
+                Trusted by 1000+ travelers worldwide
+                <svg className="w-4 h-4 ml-2 text-white/60 group-hover:text-white/80 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               </span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-8">
-              Discover
-              <span className="block bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent">
-                Libya's Hidden Gems
-              </span>
-            </h1>
+            {/* Ultra-Modern Typography */}
+            <div className="mb-8 animate-fade-in-up animation-delay-200">
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] mb-6 tracking-tight">
+                <span className="block relative">
+                  Discover
+                  <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 blur-lg rounded-lg"></div>
+                </span>
+                <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-x bg-300% mt-4">
+                  Libya's Hidden Gems
+                </span>
+              </h1>
+              
+              {/* Subtitle with enhanced styling */}
+              <div className="relative mt-8">
+                <p className="text-xl md:text-2xl lg:text-3xl text-slate-300 max-w-4xl mx-auto leading-relaxed font-light">
+                  Experience <span className="text-white font-medium">authentic Libyan hospitality</span> with our curated collection of 
+                  <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent font-medium"> unique accommodations</span> across the country's most beautiful destinations.
+                </p>
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full opacity-60"></div>
+              </div>
+            </div>
             
-            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
-              Experience authentic Libyan hospitality with our curated collection of unique accommodations across the country's most beautiful destinations.
-            </p>
+            {/* Enhanced Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12 animate-fade-in-up animation-delay-400">
+              <button className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-2xl shadow-2xl hover:shadow-cyan-500/25 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1">
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-500"></div>
+                <div className="relative flex items-center">
+                  <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  Start Exploring
+                </div>
+              </button>
+              
+              <button className="group px-8 py-4 bg-white/10 backdrop-blur-xl text-white font-semibold rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 transform hover:scale-105">
+                <div className="flex items-center">
+                  <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Watch Demo
+                  <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </button>
+            </div>
           </div>
 
-          {/* Modern Search Card */}
-          <div className="max-w-5xl mx-auto mt-16">
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 shadow-2xl p-8">
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <button className="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                  <svg className="w-4 h-4 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                  </svg>
-                  Rent
-                </button>
-                <button className="px-6 py-3 text-sm font-semibold text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300">
-                  <svg className="w-4 h-4 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                  </svg>
-                  Buy
-                </button>
-                <button className="px-6 py-3 text-sm font-semibold text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300">
-                  <svg className="w-4 h-4 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  </svg>
-                  Sell
-                </button>
-              </div>
+          {/* Ultra-Modern Search Card */}
+          <div className="max-w-6xl mx-auto mt-20 animate-fade-in-up animation-delay-600">
+            <div className="relative group">
+              {/* Glow effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-1000"></div>
               
-              <form onSubmit={handleSearchSubmit} className="space-y-6">
-                {/* Main Search Bar */}
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
-                    <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 12.414a6 6 0 111.414-1.414l4.243 4.243a1 1 0 01-1.414 1.414z" />
-                    </svg>
+              <div className="relative bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 shadow-2xl p-8 lg:p-12">
+                {/* Enhanced Tab Buttons */}
+                <div className="flex flex-wrap justify-center gap-3 mb-10">
+                  <button className="group relative px-8 py-4 text-sm font-bold text-white bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl shadow-xl hover:shadow-cyan-500/25 transition-all duration-500 transform hover:scale-105 modern-button">
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-2xl blur opacity-50 group-hover:opacity-75 transition duration-500"></div>
+                    <div className="relative flex items-center">
+                      <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                      </svg>
+                      Rent
+                    </div>
+                  </button>
+                  <button className="group px-8 py-4 text-sm font-semibold text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-2xl border border-white/20 hover:border-white/40 transition-all duration-500 transform hover:scale-105">
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                      </svg>
+                      Buy
+                    </div>
+                  </button>
+                  <button className="group px-8 py-4 text-sm font-semibold text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-2xl border border-white/20 hover:border-white/40 transition-all duration-500 transform hover:scale-105">
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
+                      Sell
+                    </div>
+                  </button>
+                </div>
+              
+              <form onSubmit={handleSearchSubmit} className="space-y-8">
+                {/* Enhanced Main Search Bar */}
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-8 flex items-center pointer-events-none z-10">
+                    <div className="p-2 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-xl">
+                      <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 12.414a6 6 0 111.414-1.414l4.243 4.243a1 1 0 01-1.414 1.414z" />
+                      </svg>
+                    </div>
                   </div>
                   <input
                     type="text"
@@ -204,44 +267,45 @@ const UV_Landing: React.FC = () => {
                     placeholder="Where do you want to stay? (City, neighborhood, or landmark)"
                     value={searchFormValues.location}
                     onChange={(e) => handleSearchChange('location', e.target.value)}
-                    className="w-full pl-16 pr-6 py-5 text-lg bg-white/90 backdrop-blur-sm border border-white/30 rounded-2xl focus:ring-4 focus:ring-purple-500/30 focus:border-purple-400 text-gray-900 placeholder-gray-500 shadow-lg transition-all duration-300"
+                    className="w-full pl-20 pr-8 py-6 text-lg bg-white/95 backdrop-blur-xl border-2 border-white/30 rounded-3xl focus:ring-4 focus:ring-cyan-500/30 focus:border-cyan-400 text-gray-900 placeholder-gray-500 shadow-2xl transition-all duration-500 hover:shadow-cyan-500/10 group-hover:border-white/50"
                     required
                   />
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                 </div>
                 
-                {/* Filters Row */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <div className="relative">
-                    <label className="block text-sm font-medium text-white/90 mb-2">Check-in</label>
+                {/* Enhanced Filters Row */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                  <div className="relative group">
+                    <label className="block text-sm font-bold text-white/95 mb-3 tracking-wide">Check-in</label>
                     <input
                       type="date"
                       id="check_in"
                       value={searchFormValues.check_in}
                       onChange={(e) => handleSearchChange('check_in', e.target.value)}
-                      className="w-full px-4 py-4 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl focus:ring-4 focus:ring-purple-500/30 focus:border-purple-400 text-gray-900 shadow-lg transition-all duration-300"
+                      className="w-full px-6 py-5 bg-white/95 backdrop-blur-xl border-2 border-white/30 rounded-2xl focus:ring-4 focus:ring-cyan-500/30 focus:border-cyan-400 text-gray-900 shadow-xl transition-all duration-500 hover:shadow-cyan-500/10 group-hover:border-white/50"
                       required
                     />
                   </div>
                   
-                  <div className="relative">
-                    <label className="block text-sm font-medium text-white/90 mb-2">Check-out</label>
+                  <div className="relative group">
+                    <label className="block text-sm font-bold text-white/95 mb-3 tracking-wide">Check-out</label>
                     <input
                       type="date"
                       id="check_out"
                       value={searchFormValues.check_out}
                       onChange={(e) => handleSearchChange('check_out', e.target.value)}
-                      className="w-full px-4 py-4 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl focus:ring-4 focus:ring-purple-500/30 focus:border-purple-400 text-gray-900 shadow-lg transition-all duration-300"
+                      className="w-full px-6 py-5 bg-white/95 backdrop-blur-xl border-2 border-white/30 rounded-2xl focus:ring-4 focus:ring-cyan-500/30 focus:border-cyan-400 text-gray-900 shadow-xl transition-all duration-500 hover:shadow-cyan-500/10 group-hover:border-white/50"
                       required
                     />
                   </div>
                   
-                  <div className="relative">
-                    <label className="block text-sm font-medium text-white/90 mb-2">Guests</label>
+                  <div className="relative group">
+                    <label className="block text-sm font-bold text-white/95 mb-3 tracking-wide">Guests</label>
                     <select
                       id="guests"
                       value={searchFormValues.guest_count}
                       onChange={(e) => handleSearchChange('guest_count', parseInt(e.target.value))}
-                      className="w-full px-4 py-4 bg-white/90 backdrop-blur-sm border border-white/30 rounded-xl focus:ring-4 focus:ring-purple-500/30 focus:border-purple-400 text-gray-900 shadow-lg transition-all duration-300"
+                      className="w-full px-6 py-5 bg-white/95 backdrop-blur-xl border-2 border-white/30 rounded-2xl focus:ring-4 focus:ring-cyan-500/30 focus:border-cyan-400 text-gray-900 shadow-xl transition-all duration-500 hover:shadow-cyan-500/10 group-hover:border-white/50"
                     >
                       {[1, 2, 3, 4, 5, 6, 7, 8].map(num => (
                         <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
@@ -252,12 +316,15 @@ const UV_Landing: React.FC = () => {
                   <div className="flex items-end">
                     <button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:scale-105"
+                      className="group relative w-full bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 hover:from-cyan-500 hover:via-purple-500 hover:to-pink-500 text-white font-bold py-5 px-8 rounded-2xl transition-all duration-500 flex items-center justify-center shadow-2xl hover:shadow-cyan-500/25 transform hover:scale-105 hover:-translate-y-1 modern-button overflow-hidden"
                     >
-                      <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                      </svg>
-                      Search
+                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+                      <div className="relative flex items-center">
+                        <svg className="w-6 h-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        Search Now
+                      </div>
                     </button>
                   </div>
                 </div>
@@ -265,24 +332,36 @@ const UV_Landing: React.FC = () => {
             </div>
           </div>
 
-          {/* Modern Stats */}
-          <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="text-center group">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
-                <div className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">500+</div>
-                <div className="text-white/80 font-medium">Properties Listed</div>
+          {/* Ultra-Modern Stats */}
+          <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="text-center group animate-fade-in-up animation-delay-200">
+              <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-2xl hover:shadow-cyan-500/20">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative">
+                  <div className="text-5xl lg:text-6xl font-black bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-3 animate-gradient-x bg-300%">500+</div>
+                  <div className="text-white/90 font-semibold text-lg tracking-wide">Properties Listed</div>
+                  <div className="mt-2 w-12 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full mx-auto"></div>
+                </div>
               </div>
             </div>
-            <div className="text-center group">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
-                <div className="text-4xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent mb-2">50+</div>
-                <div className="text-white/80 font-medium">Cities Covered</div>
+            <div className="text-center group animate-fade-in-up animation-delay-400">
+              <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-2xl hover:shadow-purple-500/20">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative">
+                  <div className="text-5xl lg:text-6xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3 animate-gradient-x bg-300%">50+</div>
+                  <div className="text-white/90 font-semibold text-lg tracking-wide">Cities Covered</div>
+                  <div className="mt-2 w-12 h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto"></div>
+                </div>
               </div>
             </div>
-            <div className="text-center group">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
-                <div className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent mb-2">1000+</div>
-                <div className="text-white/80 font-medium">Happy Guests</div>
+            <div className="text-center group animate-fade-in-up animation-delay-600">
+              <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-2xl hover:shadow-emerald-500/20">
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative">
+                  <div className="text-5xl lg:text-6xl font-black bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-3 animate-gradient-x bg-300%">1000+</div>
+                  <div className="text-white/90 font-semibold text-lg tracking-wide">Happy Guests</div>
+                  <div className="mt-2 w-12 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full mx-auto"></div>
+                </div>
               </div>
             </div>
           </div>
