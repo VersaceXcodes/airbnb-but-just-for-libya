@@ -331,37 +331,37 @@ const UV_Landing: React.FC = () => {
               </form>
             </div>
           </div>
+        </div>
 
-          {/* Ultra-Modern Stats */}
-          <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <div className="text-center group animate-fade-in-up animation-delay-200">
-              <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-2xl hover:shadow-cyan-500/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative">
-                  <div className="text-5xl lg:text-6xl font-black bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-3 animate-gradient-x bg-300%">500+</div>
-                  <div className="text-white/90 font-semibold text-lg tracking-wide">Properties Listed</div>
-                  <div className="mt-2 w-12 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full mx-auto"></div>
-                </div>
+        {/* Ultra-Modern Stats */}
+        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="text-center group animate-fade-in-up animation-delay-200">
+            <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-2xl hover:shadow-cyan-500/20">
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative">
+                <div className="text-5xl lg:text-6xl font-black bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-3 animate-gradient-x bg-300%">500+</div>
+                <div className="text-white/90 font-semibold text-lg tracking-wide">Properties Listed</div>
+                <div className="mt-2 w-12 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full mx-auto"></div>
               </div>
             </div>
-            <div className="text-center group animate-fade-in-up animation-delay-400">
-              <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-2xl hover:shadow-purple-500/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative">
-                  <div className="text-5xl lg:text-6xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3 animate-gradient-x bg-300%">50+</div>
-                  <div className="text-white/90 font-semibold text-lg tracking-wide">Cities Covered</div>
-                  <div className="mt-2 w-12 h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto"></div>
-                </div>
+          </div>
+          <div className="text-center group animate-fade-in-up animation-delay-400">
+            <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-2xl hover:shadow-purple-500/20">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative">
+                <div className="text-5xl lg:text-6xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3 animate-gradient-x bg-300%">50+</div>
+                <div className="text-white/90 font-semibold text-lg tracking-wide">Cities Covered</div>
+                <div className="mt-2 w-12 h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto"></div>
               </div>
             </div>
-            <div className="text-center group animate-fade-in-up animation-delay-600">
-              <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-2xl hover:shadow-emerald-500/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative">
-                  <div className="text-5xl lg:text-6xl font-black bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-3 animate-gradient-x bg-300%">1000+</div>
-                  <div className="text-white/90 font-semibold text-lg tracking-wide">Happy Guests</div>
-                  <div className="mt-2 w-12 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full mx-auto"></div>
-                </div>
+          </div>
+          <div className="text-center group animate-fade-in-up animation-delay-600">
+            <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-2xl hover:shadow-emerald-500/20">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative">
+                <div className="text-5xl lg:text-6xl font-black bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-3 animate-gradient-x bg-300%">1000+</div>
+                <div className="text-white/90 font-semibold text-lg tracking-wide">Happy Guests</div>
+                <div className="mt-2 w-12 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full mx-auto"></div>
               </div>
             </div>
           </div>
@@ -669,6 +669,7 @@ const UV_Landing: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </>
   );
