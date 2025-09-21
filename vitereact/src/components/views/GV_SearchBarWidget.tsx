@@ -110,17 +110,20 @@ const GV_SearchBarWidget: React.FC = () => {
   
   // Handle date selection
   const handleDateSelect = (date: string, isCheckIn: boolean) => {
+    // Ensure date is in proper YYYY-MM-DD format
+    const formattedDate = new Date(date).toISOString().split('T')[0];
+    
     if (isCheckIn) {
-      setCheckInDate(date);
+      setCheckInDate(formattedDate);
       setShowCheckInCalendar(false);
       
-      // Auto-open check-out calendar
-      if (!checkOutDate || checkOutDate < date) {
+      // Auto-open check-out calendar and clear invalid check-out date
+      if (!checkOutDate || checkOutDate <= formattedDate) {
         setCheckOutDate(null);
       }
       setShowCheckOutCalendar(true);
     } else {
-      setCheckOutDate(date);
+      setCheckOutDate(formattedDate);
       setShowCheckOutCalendar(false);
     }
     
@@ -134,7 +137,20 @@ const GV_SearchBarWidget: React.FC = () => {
     let isValid = true;
     
     if (checkInDate && checkOutDate) {
-      if (checkInDate > checkOutDate) {
+      const checkIn = new Date(checkInDate);
+      const checkOut = new Date(checkOutDate);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      // Check if dates are valid
+      if (isNaN(checkIn.getTime()) || isNaN(checkOut.getTime())) {
+        setCheckInError('Please enter a valid date');
+        setCheckOutError('Please enter a valid date');
+        isValid = false;
+      } else if (checkIn < today) {
+        setCheckInError('Check-in date cannot be in the past');
+        isValid = false;
+      } else if (checkOut <= checkIn) {
         setCheckInError('Check-in date must be before check-out date');
         setCheckOutError('Check-out date must be after check-in date');
         isValid = false;

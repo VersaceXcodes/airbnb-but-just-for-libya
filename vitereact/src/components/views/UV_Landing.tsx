@@ -108,6 +108,26 @@ const UV_Landing: React.FC = () => {
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Validate dates before submission
+    if (searchFormValues.check_in && searchFormValues.check_out) {
+      const checkInDate = new Date(searchFormValues.check_in);
+      const checkOutDate = new Date(searchFormValues.check_out);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      // Validate check-in date is not in the past
+      if (checkInDate < today) {
+        alert('Check-in date cannot be in the past');
+        return;
+      }
+      
+      // Validate check-out date is after check-in date
+      if (checkOutDate <= checkInDate) {
+        alert('Check-out date must be after check-in date');
+        return;
+      }
+    }
+    
     // Update global search filters
     updateSearchFilters({
       location: searchFormValues.location || null,
@@ -122,6 +142,23 @@ const UV_Landing: React.FC = () => {
 
   // Handle search form changes
   const handleSearchChange = (field: string, value: string | number) => {
+    // Ensure date values are properly formatted for HTML5 date inputs
+    if (field === 'check_in' || field === 'check_out') {
+      const dateValue = value as string;
+      // Validate and format date to YYYY-MM-DD format
+      if (dateValue) {
+        const date = new Date(dateValue);
+        if (!isNaN(date.getTime())) {
+          const formattedDate = date.toISOString().split('T')[0];
+          setSearchFormValues(prev => ({
+            ...prev,
+            [field]: formattedDate
+          }));
+          return;
+        }
+      }
+    }
+    
     setSearchFormValues(prev => ({
       ...prev,
       [field]: value
@@ -282,6 +319,8 @@ const UV_Landing: React.FC = () => {
                       id="check_in"
                       value={searchFormValues.check_in}
                       onChange={(e) => handleSearchChange('check_in', e.target.value)}
+                      min={new Date().toISOString().split('T')[0]}
+                      max={new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}
                       className="w-full px-6 py-5 bg-white/95 backdrop-blur-xl border-2 border-white/30 rounded-2xl focus:ring-4 focus:ring-cyan-500/30 focus:border-cyan-400 text-gray-900 shadow-xl transition-all duration-500 hover:shadow-cyan-500/10 group-hover:border-white/50"
                       required
                     />
@@ -294,6 +333,8 @@ const UV_Landing: React.FC = () => {
                       id="check_out"
                       value={searchFormValues.check_out}
                       onChange={(e) => handleSearchChange('check_out', e.target.value)}
+                      min={searchFormValues.check_in ? new Date(new Date(searchFormValues.check_in).getTime() + 24 * 60 * 60 * 1000).toISOString().split('T')[0] : new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().split('T')[0]}
+                      max={new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}
                       className="w-full px-6 py-5 bg-white/95 backdrop-blur-xl border-2 border-white/30 rounded-2xl focus:ring-4 focus:ring-cyan-500/30 focus:border-cyan-400 text-gray-900 shadow-xl transition-all duration-500 hover:shadow-cyan-500/10 group-hover:border-white/50"
                       required
                     />

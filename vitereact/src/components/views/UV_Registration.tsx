@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAppStore } from '@/store/main';
-import axios from 'axios';
 
 const UV_Registration: React.FC = () => {
   const navigate = useNavigate();
@@ -23,11 +22,7 @@ const UV_Registration: React.FC = () => {
     emergency_contact_name: null as string | null,
     emergency_contact_phone: null as string | null,
   });
-  const [verificationState, setVerificationState] = useState({
-    email_verified: false,
-    sms_verified: false,
-    verification_code: '',
-  });
+  // Verification state removed - will be implemented later
   const [formErrors, setFormErrors] = useState({
     email: null as string | null,
     phone_number: null as string | null,
@@ -36,9 +31,6 @@ const UV_Registration: React.FC = () => {
     verification_code: null as string | null,
   });
   const [submitLoading, setSubmitLoading] = useState(false);
-  const [verificationLoading, setVerificationLoading] = useState(false);
-  const [verificationSent, setVerificationSent] = useState(false);
-  const [activeVerification, setActiveVerification] = useState<'email' | 'sms' | null>(null);
   
   // Terms acceptance
   const [termsAccepted, setTermsAccepted] = useState({
@@ -100,21 +92,7 @@ const UV_Registration: React.FC = () => {
     return !errors.email && !errors.phone_number && !errors.password_hash && !errors.name;
   };
   
-  // Validate verification code
-  const validateVerification = () => {
-    if (!verificationState.verification_code) {
-      setFormErrors(prev => ({ ...prev, verification_code: 'Verification code is required' }));
-      return false;
-    }
-    
-    if (verificationState.verification_code.length !== 6) {
-      setFormErrors(prev => ({ ...prev, verification_code: 'Verification code must be 6 digits' }));
-      return false;
-    }
-    
-    setFormErrors(prev => ({ ...prev, verification_code: null }));
-    return true;
-  };
+  // Verification validation removed - will be implemented later
   
   // Handle input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -133,46 +111,7 @@ const UV_Registration: React.FC = () => {
     setTermsAccepted(prev => ({ ...prev, [name]: checked }));
   };
   
-  // Send verification code
-  const sendVerificationCode = async (type: 'email' | 'sms') => {
-    if (!validateForm()) return;
-    
-    setVerificationLoading(true);
-    setActiveVerification(type);
-    
-    try {
-      await axios.post(
-        `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'}/api/auth/send-verification`,
-        {
-          email: type === 'email' ? formValues.email : undefined,
-          phone_number: type === 'sms' ? formValues.phone_number : undefined,
-        }
-      );
-      
-      setVerificationSent(true);
-      setVerificationState(prev => ({ ...prev, verification_code: '' }));
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.message || 'Failed to send verification code';
-      setFormErrors(prev => ({ ...prev, [type === 'email' ? 'email' : 'phone_number']: errorMessage }));
-    } finally {
-      setVerificationLoading(false);
-    }
-  };
-  
-  // Verify code
-  const verifyCode = async () => {
-    if (!validateVerification()) return;
-    
-    // In a real app, we would make an API call to verify the code
-    // For now, we'll just simulate verification
-    setVerificationState(prev => ({
-      ...prev,
-      [activeVerification === 'email' ? 'email_verified' : 'sms_verified']: true,
-    }));
-    
-    setActiveVerification(null);
-    setVerificationSent(false);
-  };
+  // Verification functions removed - will be implemented later
   
   // Handle registration submission
   const handleSubmit = async (e: React.FormEvent) => {
@@ -188,11 +127,7 @@ const UV_Registration: React.FC = () => {
       return;
     }
     
-    // Skip verification for now - make it optional
-    // if (!verificationState.email_verified || !verificationState.sms_verified) {
-    //   alert('Please verify both your email and phone number');
-    //   return;
-    // }
+    // Verification is optional for now - will be implemented later
     
     setSubmitLoading(true);
     clearAuthError();
@@ -221,9 +156,6 @@ const UV_Registration: React.FC = () => {
   
   // Check if all terms are accepted
   const areAllTermsAccepted = Object.values(termsAccepted).every(Boolean);
-  
-  // Check if both email and SMS are verified
-  const isFullyVerified = verificationState.email_verified && verificationState.sms_verified;
 
   return (
     <>
@@ -310,31 +242,18 @@ const UV_Registration: React.FC = () => {
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                       Email Address
                     </label>
-                    <div className="mt-1 flex rounded-md shadow-sm">
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formValues.email}
-                        onChange={handleInputChange}
-                        className={`flex-1 min-w-0 block w-full px-3 py-2 border ${
-                          formErrors.email ? 'border-red-300' : 'border-gray-300'
-                        } rounded-l-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => sendVerificationCode('email')}
-                        disabled={verificationLoading || verificationState.email_verified}
-                        className="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"
-                      >
-                        {verificationState.email_verified ? 'Verified' : 'Verify'}
-                      </button>
-                    </div>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formValues.email}
+                      onChange={handleInputChange}
+                      className={`mt-1 block w-full px-3 py-2 border ${
+                        formErrors.email ? 'border-red-300' : 'border-gray-300'
+                      } rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
+                    />
                     {formErrors.email && (
                       <p className="mt-1 text-sm text-red-600">{formErrors.email}</p>
-                    )}
-                    {verificationState.email_verified && (
-                      <p className="mt-1 text-sm text-green-600">Email verified successfully</p>
                     )}
                   </div>
 
@@ -342,31 +261,18 @@ const UV_Registration: React.FC = () => {
                     <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700">
                       Phone Number
                     </label>
-                    <div className="mt-1 flex rounded-md shadow-sm">
-                      <input
-                        id="phone_number"
-                        name="phone_number"
-                        type="tel"
-                        value={formValues.phone_number}
-                        onChange={handleInputChange}
-                        className={`flex-1 min-w-0 block w-full px-3 py-2 border ${
-                          formErrors.phone_number ? 'border-red-300' : 'border-gray-300'
-                        } rounded-l-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => sendVerificationCode('sms')}
-                        disabled={verificationLoading || verificationState.sms_verified}
-                        className="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"
-                      >
-                        {verificationState.sms_verified ? 'Verified' : 'Verify'}
-                      </button>
-                    </div>
+                    <input
+                      id="phone_number"
+                      name="phone_number"
+                      type="tel"
+                      value={formValues.phone_number}
+                      onChange={handleInputChange}
+                      className={`mt-1 block w-full px-3 py-2 border ${
+                        formErrors.phone_number ? 'border-red-300' : 'border-gray-300'
+                      } rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
+                    />
                     {formErrors.phone_number && (
                       <p className="mt-1 text-sm text-red-600">{formErrors.phone_number}</p>
-                    )}
-                    {verificationState.sms_verified && (
-                      <p className="mt-1 text-sm text-green-600">Phone number verified successfully</p>
                     )}
                   </div>
 
@@ -394,59 +300,7 @@ const UV_Registration: React.FC = () => {
                 </div>
               </div>
 
-              {/* Verification Code Input */}
-              {(verificationSent || verificationState.email_verified || verificationState.sms_verified) && (
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <h3 className="text-md font-medium text-gray-900 mb-2">
-                    Verify {activeVerification === 'email' ? 'Email' : 'Phone'}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-3">
-                    We've sent a verification code to your {activeVerification === 'email' ? 'email' : 'phone'}. 
-                    Please enter it below.
-                  </p>
-                  
-                  <div className="flex space-x-2">
-                    <input
-                      type="text"
-                      value={verificationState.verification_code}
-                      onChange={(e) => {
-                        setVerificationState(prev => ({ ...prev, verification_code: e.target.value }));
-                        if (formErrors.verification_code) {
-                          setFormErrors(prev => ({ ...prev, verification_code: null }));
-                        }
-                      }}
-                      maxLength={6}
-                      className={`flex-1 px-3 py-2 border ${
-                        formErrors.verification_code ? 'border-red-300' : 'border-gray-300'
-                      } rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
-                      placeholder="Enter 6-digit code"
-                    />
-                    <button
-                      type="button"
-                      onClick={verifyCode}
-                      disabled={verificationLoading || verificationState.verification_code.length !== 6}
-                      className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
-                    >
-                      {verificationLoading ? 'Verifying...' : 'Verify'}
-                    </button>
-                  </div>
-                  
-                  {formErrors.verification_code && (
-                    <p className="mt-1 text-sm text-red-600">{formErrors.verification_code}</p>
-                  )}
-                  
-                  <p className="mt-2 text-sm text-gray-600">
-                    Didn't receive the code?{' '}
-                    <button
-                      type="button"
-                      onClick={() => sendVerificationCode(activeVerification || 'email')}
-                      className="font-medium text-blue-600 hover:text-blue-500"
-                    >
-                      Resend
-                    </button>
-                  </p>
-                </div>
-              )}
+
 
               {/* Profile Setup */}
               <div>
@@ -560,9 +414,9 @@ const UV_Registration: React.FC = () => {
               <div>
                 <button
                   type="submit"
-                  disabled={submitLoading || !isFullyVerified || !areAllTermsAccepted}
+                  disabled={submitLoading || !areAllTermsAccepted}
                   className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
-                    submitLoading || !isFullyVerified || !areAllTermsAccepted
+                    submitLoading || !areAllTermsAccepted
                       ? 'bg-gray-400 cursor-not-allowed'
                       : 'bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
                   }`}
@@ -580,17 +434,15 @@ const UV_Registration: React.FC = () => {
                   )}
                 </button>
                 
-                {!isFullyVerified && (
-                  <p className="mt-2 text-sm text-red-600 text-center">
-                    Please verify both your email and phone number
-                  </p>
-                )}
-                
                 {!areAllTermsAccepted && (
                   <p className="mt-2 text-sm text-red-600 text-center">
                     Please accept all terms and conditions
                   </p>
                 )}
+                
+                <p className="mt-2 text-sm text-gray-600 text-center">
+                  Email and phone verification will be available after account creation
+                </p>
               </div>
             </form>
 

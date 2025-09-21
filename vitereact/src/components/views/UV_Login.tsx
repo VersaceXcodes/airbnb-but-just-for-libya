@@ -35,7 +35,7 @@ const UV_Login: React.FC = () => {
       setErrors({ email: '', password: '', general: '' });
       clearAuthError();
     }
-  }, [email, password, clearAuthError]);
+  }, [email, password, clearAuthError, errors.email, errors.password, errors.general]);
 
   // Update general error when store error changes
   useEffect(() => {
@@ -78,10 +78,7 @@ const UV_Login: React.FC = () => {
     
     try {
       await loginUser(email, password);
-      // Only navigate if login was successful and user is authenticated
-      if (isAuthenticated) {
-        navigate('/dashboard');
-      }
+      // Navigation will be handled by the useEffect hook when isAuthenticated changes
     } catch (err: any) {
       // Error is handled in store, but we'll set general error here
       console.error('Login error:', err);

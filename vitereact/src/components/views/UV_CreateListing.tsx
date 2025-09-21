@@ -274,7 +274,7 @@ const UV_CreateListing: React.FC = () => {
       // Prepare data for submission
       const submissionData = {
         ...listingData,
-        amenities: listingData.amenities,
+        amenities: listingData.amenities.join(','), // Convert array to comma-separated string
         latitude: null,
         longitude: null,
         house_rules: listingData.house_rules || '',
