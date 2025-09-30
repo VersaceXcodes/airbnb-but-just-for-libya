@@ -242,7 +242,7 @@ const UV_CreateListing: React.FC = () => {
 
   // Submit property listing
   const createPropertyMutation = useMutation({
-    mutationFn: async (data: typeof listingData) => {
+    mutationFn: async (data: Omit<typeof listingData, 'amenities'> & { amenities: string }) => {
       const response = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'}/api/properties`,
         data,
