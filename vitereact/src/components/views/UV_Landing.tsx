@@ -110,10 +110,17 @@ const UV_Landing: React.FC = () => {
     
     // Validate dates before submission
     if (searchFormValues.check_in && searchFormValues.check_out) {
-      const checkInDate = new Date(searchFormValues.check_in);
-      const checkOutDate = new Date(searchFormValues.check_out);
+      // Parse dates properly - HTML5 date inputs always provide YYYY-MM-DD format
+      const checkInDate = new Date(searchFormValues.check_in + 'T00:00:00');
+      const checkOutDate = new Date(searchFormValues.check_out + 'T00:00:00');
       const today = new Date();
       today.setHours(0, 0, 0, 0);
+      
+      // Check if dates are valid
+      if (isNaN(checkInDate.getTime()) || isNaN(checkOutDate.getTime())) {
+        alert('Please enter valid dates');
+        return;
+      }
       
       // Validate check-in date is not in the past
       if (checkInDate < today) {
@@ -126,6 +133,12 @@ const UV_Landing: React.FC = () => {
         alert('Check-out date must be after check-in date');
         return;
       }
+    }
+    
+    // Validate required fields
+    if (!searchFormValues.location.trim()) {
+      alert('Please enter a location');
+      return;
     }
     
     // Update global search filters
@@ -226,7 +239,16 @@ const UV_Landing: React.FC = () => {
               </button>
               
               <button 
-                onClick={() => navigate('/search')}
+                onClick={() => {
+                  // Scroll to the "How It Works" section
+                  const howItWorksSection = document.querySelector('[data-section="how-it-works"]');
+                  if (howItWorksSection) {
+                    howItWorksSection.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    // Fallback: navigate to search page
+                    navigate('/search');
+                  }
+                }}
                 className="group px-8 py-4 bg-white/10 backdrop-blur-xl text-white font-semibold rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 transform hover:scale-105"
               >
                 <div className="flex items-center">
@@ -474,7 +496,7 @@ const UV_Landing: React.FC = () => {
       </div>
 
       {/* How It Works Sections */}
-      <div className="py-16 bg-white">
+      <div className="py-16 bg-white" data-section="how-it-works">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:text-center">
             <h2 className="text-base text-green-600 font-semibold tracking-wide uppercase">How It Works</h2>

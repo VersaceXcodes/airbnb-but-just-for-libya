@@ -44,6 +44,14 @@ export default defineConfig({
 		},
 	},
 	build: {
-		outDir: "public",
+		outDir: "../backend/public",
+		emptyOutDir: true,
+		rollupOptions: {
+			output: {
+				assetFileNames: 'assets/[name].[hash].[ext]',
+				chunkFileNames: 'assets/[name].[hash].js',
+				entryFileNames: 'assets/[name].[hash].js',
+			},
+		},
 	},
 });
