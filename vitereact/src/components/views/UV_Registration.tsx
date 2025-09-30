@@ -371,11 +371,11 @@ const UV_Registration: React.FC = () => {
                           className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
                         />
                       </div>
-                      <div className="ml-3 text-sm">
+                       <div className="ml-3 text-sm">
                         <label htmlFor={key} className="font-medium text-gray-700">
                           {key === 'terms_of_service' && 'I agree to the Terms of Service'}
                           {key === 'privacy_policy' && 'I agree to the Privacy Policy'}
-                          {key === 'libya_terms' && 'I agree to Libya-specific Terms of Service'}
+                          {key === 'libya_terms' && 'I agree to Libya-specific Terms'}
                           {key === 'content_guidelines' && 'I agree to the Content Guidelines'}
                           {key === 'accommodation_laws' && 'I acknowledge the Local Accommodation Laws'}
                         </label>

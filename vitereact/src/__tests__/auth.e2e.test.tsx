@@ -1,6 +1,6 @@
 import React from 'react';
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -97,6 +97,7 @@ describe('Auth E2E Flow (real API)', () => {
       expect(state.authentication_state.current_user).toBeNull();
     });
 
+    cleanup();
     render(<UV_Login />, { wrapper: Wrapper });
 
     await waitFor(() => {
