@@ -1801,6 +1801,90 @@ app.patch('/api/messages/:message_id', authenticateToken, async (req, res) => {
   }
 });
 
+// Review Management Routes
+
+/*
+Get all reviews endpoint
+Retrieves reviews with filtering, sorting, and pagination
+*/
+app.get('/api/reviews', async (req, res) => {
+  try {
+    // Coerce query parameters to proper types
+    const reviewParams = {
+      property_id: req.query.property_id as string,
+      reviewer_id: req.query.reviewer_id as string,
+      host_id: req.query.host_id as string,
+      sort_by: req.query.sort_by as string,
+      limit: parseInt((req.query.limit as string) || '10'),
+      offset: parseInt((req.query.offset as string) || '0')
+    };
+
+    const {
+      property_id, reviewer_id, host_id, sort_by,
+      limit, offset
+    } = reviewParams;
+
+    let query = `SELECT * FROM reviews WHERE 1=1`;
+    const queryParams = [];
+    let paramCount = 1;
+
+    // Apply filters
+    if (property_id) {
+      query += ` AND property_id = $${paramCount}`;
+      queryParams.push(property_id);
+      paramCount++;
+    }
+
+    if (reviewer_id) {
+      query += ` AND reviewer_id = $${paramCount}`;
+      queryParams.push(reviewer_id);
+      paramCount++;
+    }
+
+    if (host_id) {
+      query += ` AND host_id = $${paramCount}`;
+      queryParams.push(host_id);
+      paramCount++;
+    }
+
+    // Sorting
+    switch (sort_by) {
+      case 'rating_high_to_low':
+        query += ` ORDER BY overall_rating DESC`;
+        break;
+      case 'rating_low_to_high':
+        query += ` ORDER BY overall_rating ASC`;
+        break;
+      case 'newest':
+        query += ` ORDER BY created_at DESC`;
+        break;
+      case 'oldest':
+        query += ` ORDER BY created_at ASC`;
+        break;
+      default:
+        query += ` ORDER BY created_at DESC`;
+    }
+
+    // Pagination
+    query += ` LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
+    queryParams.push(limit, offset);
+
+    const result = await pool.query(query, queryParams);
+
+    // Get total count for pagination
+    const countQuery = `SELECT COUNT(*) FROM reviews WHERE 1=1`;
+    const countResult = await pool.query(countQuery);
+
+    res.json({
+      reviews: result.rows,
+      total_count: parseInt(countResult.rows[0].count)
+    });
+  } catch (error) {
+    console.error('Get reviews error:', error);
+    res.status(500).json(createErrorResponse('Internal server error', error, 'INTERNAL_SERVER_ERROR'));
+  }
+});
+
 // Notification Routes
 
 /*

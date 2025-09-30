@@ -98,7 +98,7 @@ const UV_Landing: React.FC = () => {
           }
         }
       );
-      return response.data;
+      return response.data.reviews;
     },
     staleTime: 10 * 60 * 1000, // 10 minutes
     retry: 1
@@ -142,23 +142,7 @@ const UV_Landing: React.FC = () => {
 
   // Handle search form changes
   const handleSearchChange = (field: string, value: string | number) => {
-    // Ensure date values are properly formatted for HTML5 date inputs
-    if (field === 'check_in' || field === 'check_out') {
-      const dateValue = value as string;
-      // Validate and format date to YYYY-MM-DD format
-      if (dateValue) {
-        const date = new Date(dateValue);
-        if (!isNaN(date.getTime())) {
-          const formattedDate = date.toISOString().split('T')[0];
-          setSearchFormValues(prev => ({
-            ...prev,
-            [field]: formattedDate
-          }));
-          return;
-        }
-      }
-    }
-    
+    // For date inputs, use the value directly as HTML5 date inputs already provide YYYY-MM-DD format
     setSearchFormValues(prev => ({
       ...prev,
       [field]: value
@@ -228,7 +212,10 @@ const UV_Landing: React.FC = () => {
             
             {/* Enhanced Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12 animate-fade-in-up animation-delay-400">
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-2xl shadow-2xl hover:shadow-cyan-500/25 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1">
+              <button 
+                onClick={() => navigate('/search')}
+                className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-2xl shadow-2xl hover:shadow-cyan-500/25 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1"
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-500"></div>
                 <div className="relative flex items-center">
                   <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -238,7 +225,10 @@ const UV_Landing: React.FC = () => {
                 </div>
               </button>
               
-              <button className="group px-8 py-4 bg-white/10 backdrop-blur-xl text-white font-semibold rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 transform hover:scale-105">
+              <button 
+                onClick={() => navigate('/search')}
+                className="group px-8 py-4 bg-white/10 backdrop-blur-xl text-white font-semibold rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 transform hover:scale-105"
+              >
                 <div className="flex items-center">
                   <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -261,7 +251,10 @@ const UV_Landing: React.FC = () => {
               <div className="relative bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 shadow-2xl p-8 lg:p-12">
                 {/* Enhanced Tab Buttons */}
                 <div className="flex flex-wrap justify-center gap-3 mb-10">
-                  <button className="group relative px-8 py-4 text-sm font-bold text-white bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl shadow-xl hover:shadow-cyan-500/25 transition-all duration-500 transform hover:scale-105 modern-button">
+                  <button 
+                    onClick={() => navigate('/search')}
+                    className="group relative px-8 py-4 text-sm font-bold text-white bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl shadow-xl hover:shadow-cyan-500/25 transition-all duration-500 transform hover:scale-105 modern-button"
+                  >
                     <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-2xl blur opacity-50 group-hover:opacity-75 transition duration-500"></div>
                     <div className="relative flex items-center">
                       <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -270,7 +263,10 @@ const UV_Landing: React.FC = () => {
                       Rent
                     </div>
                   </button>
-                  <button className="group px-8 py-4 text-sm font-semibold text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-2xl border border-white/20 hover:border-white/40 transition-all duration-500 transform hover:scale-105">
+                  <button 
+                    onClick={() => navigate('/search')}
+                    className="group px-8 py-4 text-sm font-semibold text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-2xl border border-white/20 hover:border-white/40 transition-all duration-500 transform hover:scale-105"
+                  >
                     <div className="flex items-center">
                       <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
@@ -278,7 +274,16 @@ const UV_Landing: React.FC = () => {
                       Buy
                     </div>
                   </button>
-                  <button className="group px-8 py-4 text-sm font-semibold text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-2xl border border-white/20 hover:border-white/40 transition-all duration-500 transform hover:scale-105">
+                  <button 
+                    onClick={() => {
+                      if (isAuthenticated) {
+                        navigate('/listings/create');
+                      } else {
+                        navigate('/register');
+                      }
+                    }}
+                    className="group px-8 py-4 text-sm font-semibold text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-2xl border border-white/20 hover:border-white/40 transition-all duration-500 transform hover:scale-105"
+                  >
                     <div className="flex items-center">
                       <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
