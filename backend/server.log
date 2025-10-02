@@ -23,3 +23,7 @@ User user_LroyxRuWjUXn0e4YfYrXO connected
 127.0.0.1 - - [02/Oct/2025:20:27:37 +0000] "POST /api/auth/register HTTP/1.1" 201 629 "http://localhost:3000/dashboard" "Mozilla/5.0 (linux) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/26.1.0"
 User user_LroyxRuWjUXn0e4YfYrXO disconnected
 User user_EEO2_ETzFNdPEhKL5o8ST connected
+127.0.0.1 - - [02/Oct/2025:20:28:07 +0000] "GET / HTTP/1.1" 200 827 "-" "curl/7.88.1"
+User user_EEO2_ETzFNdPEhKL5o8ST disconnected
+127.0.0.1 - - [02/Oct/2025:20:28:45 +0000] "GET / HTTP/1.1" 200 827 "-" "curl/7.88.1"
+127.0.0.1 - - [02/Oct/2025:20:29:10 +0000] "GET / HTTP/1.1" 200 827 "-" "curl/7.88.1"
