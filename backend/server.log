@@ -7,3 +7,19 @@ Server running on port 3000 and listening on 0.0.0.0
 127.0.0.1 - - [02/Oct/2025:20:23:10 +0000] "GET /api/health HTTP/1.1" 200 54 "-" "curl/7.88.1"
 127.0.0.1 - - [02/Oct/2025:20:26:31 +0000] "GET / HTTP/1.1" 200 827 "-" "curl/7.88.1"
 127.0.0.1 - - [02/Oct/2025:20:26:56 +0000] "GET / HTTP/1.1" 200 827 "-" "curl/7.88.1"
+127.0.0.1 - - [02/Oct/2025:20:27:30 +0000] "GET /api/health HTTP/1.1" 200 54 "-" "curl/7.88.1"
+127.0.0.1 - - [02/Oct/2025:20:27:35 +0000] "POST /api/auth/register HTTP/1.1" 201 634 "http://localhost:3000/" "Mozilla/5.0 (linux) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/26.1.0"
+127.0.0.1 - - [02/Oct/2025:20:27:35 +0000] "POST /api/auth/login HTTP/1.1" 200 634 "http://localhost:3000/dashboard" "Mozilla/5.0 (linux) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/26.1.0"
+User user_mrVZF_TNyaQwAdLBtoRAy connected
+127.0.0.1 - - [02/Oct/2025:20:27:36 +0000] "POST /api/auth/register HTTP/1.1" 201 636 "http://localhost:3000/dashboard" "Mozilla/5.0 (linux) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/26.1.0"
+User user_mrVZF_TNyaQwAdLBtoRAy disconnected
+127.0.0.1 - - [02/Oct/2025:20:27:36 +0000] "POST /api/auth/register HTTP/1.1" 201 637 "http://localhost:3000/dashboard" "Mozilla/5.0 (linux) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/26.1.0"
+127.0.0.1 - - [02/Oct/2025:20:27:36 +0000] "POST /api/auth/register HTTP/1.1" 201 634 "http://localhost:3000/dashboard" "Mozilla/5.0 (linux) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/26.1.0"
+User user__edWnKQ4ZfDt0jqznWzCL connected
+User user__edWnKQ4ZfDt0jqznWzCL disconnected
+127.0.0.1 - - [02/Oct/2025:20:27:36 +0000] "POST /api/auth/login HTTP/1.1" 200 634 "http://localhost:3000/dashboard" "Mozilla/5.0 (linux) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/26.1.0"
+User user_LroyxRuWjUXn0e4YfYrXO connected
+127.0.0.1 - - [02/Oct/2025:20:27:37 +0000] "POST /api/auth/login HTTP/1.1" 400 129 "http://localhost:3000/dashboard" "Mozilla/5.0 (linux) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/26.1.0"
+127.0.0.1 - - [02/Oct/2025:20:27:37 +0000] "POST /api/auth/register HTTP/1.1" 201 629 "http://localhost:3000/dashboard" "Mozilla/5.0 (linux) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/26.1.0"
+User user_LroyxRuWjUXn0e4YfYrXO disconnected
+User user_EEO2_ETzFNdPEhKL5o8ST connected
