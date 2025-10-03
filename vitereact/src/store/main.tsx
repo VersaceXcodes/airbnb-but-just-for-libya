@@ -3,6 +3,9 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import { io, Socket } from 'socket.io-client';
 import axios from 'axios';
 
+axios.defaults.timeout = 30000;
+axios.defaults.timeoutErrorMessage = 'Request timeout - please try again';
+
 // Zod schema derived TypeScript interfaces
 interface User {
   user_id: string;

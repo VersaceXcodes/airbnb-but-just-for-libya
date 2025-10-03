@@ -84,7 +84,10 @@ const pool = new Pool(
   DATABASE_URL
     ? { 
         connectionString: DATABASE_URL, 
-        ssl: { rejectUnauthorized: false } 
+        ssl: { rejectUnauthorized: false },
+        max: 20,
+        idleTimeoutMillis: 30000,
+        connectionTimeoutMillis: 10000,
       }
     : {
         host: PGHOST,
@@ -93,6 +96,9 @@ const pool = new Pool(
         password: PGPASSWORD,
         port: Number(PGPORT),
         ssl: { rejectUnauthorized: false },
+        max: 20,
+        idleTimeoutMillis: 30000,
+        connectionTimeoutMillis: 10000,
       }
 );
 
@@ -257,6 +263,7 @@ io.use(async (socket, next) => {
     socket.user = result.rows[0];
     next();
   } catch (error) {
+    console.error('WebSocket authentication error:', error);
     next(new Error('Authentication failed'));
   }
 });
@@ -2005,7 +2012,13 @@ WebSocket connection handler
 Manages real-time communication between users
 */
 io.on('connection', (socket) => {
-  console.log(`User ${socket.user.user_id} connected`);
+  console.log(`User ${socket.user?.user_id} connected`);
+
+  if (!socket.user) {
+    console.error('Socket connected without user information');
+    socket.disconnect(true);
+    return;
+  }
 
   // Join user-specific room
   socket.join(`user_${socket.user.user_id}`);
@@ -2018,6 +2031,12 @@ io.on('connection', (socket) => {
     result.rows.forEach(conversation => {
       socket.join(`conversation_${conversation.conversation_id}`);
     });
+  }).catch(error => {
+    console.error('Error loading user conversations:', error);
+  });
+
+  socket.on('error', (error) => {
+    console.error(`Socket error for user ${socket.user.user_id}:`, error);
   });
 
   socket.on('disconnect', () => {
@@ -2028,6 +2047,56 @@ io.on('connection', (socket) => {
 // Catch-all route for SPA routing
 app.get(/^(?!\/api).*/, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Global error handlers
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+// Database connection error handler
+pool.on('error', (err) => {
+  console.error('Unexpected database error:', err);
+});
+
+// Express error handler middleware
+app.use((err, req, res, next) => {
+  console.error('Express error:', err);
+  
+  if (err.message === 'Not allowed by CORS') {
+    return res.status(403).json(createErrorResponse('CORS policy violation', err, 'CORS_ERROR'));
+  }
+  
+  if (!res.headersSent) {
+    res.status(500).json(createErrorResponse('Internal server error', err, 'INTERNAL_SERVER_ERROR'));
+  }
+});
+
+// Graceful shutdown handler
+process.on('SIGTERM', async () => {
+  console.log('SIGTERM received, closing server gracefully...');
+  
+  server.close(async () => {
+    console.log('HTTP server closed');
+    
+    try {
+      await pool.end();
+      console.log('Database pool closed');
+      process.exit(0);
+    } catch (err) {
+      console.error('Error closing database pool:', err);
+      process.exit(1);
+    }
+  });
+  
+  setTimeout(() => {
+    console.error('Forced shutdown after timeout');
+    process.exit(1);
+  }, 10000);
 });
 
 export { app, pool };
